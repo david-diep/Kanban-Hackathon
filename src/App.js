@@ -5,6 +5,7 @@ import {DragDropContext, Droppable} from 'react-beautiful-dnd'
 class App extends React.Component {
   constructor(props){
     super(props);
+    this.addCard = this.addCard.bind(this)
     this.state={
       tasks:{
         'task-1': { id: 'task-1', title:"1", content:"Take out the garbage."},
@@ -99,6 +100,11 @@ class App extends React.Component {
 }
   this.setState(newState);
 }
+
+  addCard(column){
+    console.log("add Card", column)
+  }
+
   render(){
 
     return (
@@ -130,6 +136,7 @@ class App extends React.Component {
                       const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
 
                       return <Column
+                        addCard={this.addCard}
                         key = {column.id}
                         column = {column}
                         tasks = {tasks}

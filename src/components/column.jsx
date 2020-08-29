@@ -3,6 +3,19 @@ import Task from './task';
 import {Droppable, Draggable} from 'react-beautiful-dnd'
 
 class Column extends React.Component {
+  constructor(props){
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(e){
+    console.log("handleClicked", e.target)
+    const id = e.target.id
+    const splitId = id.split('-')
+    if(splitId[0] === "column"){
+      this.props.addCard(id)
+    }
+  }
 
   render() {
     return (
@@ -25,7 +38,11 @@ class Column extends React.Component {
             {...provided.dragHandleProps}>
             <h3 className="pt-2 pl-2">{this.props.column.title}</h3>
             <div className={`m-2`}>
-              <button className={`btn btn-primary`}>
+              <button
+                id={this.props.column.id}
+                className={`btn btn-primary`}
+                onClick={this.handleClick}
+              >
                 +
               </button>
             </div>
