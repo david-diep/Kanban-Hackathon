@@ -1,6 +1,7 @@
 import React from 'react';
 import Column from './components/column'
-import {DragDropContext} from 'react-beautiful-dnd'
+import {DragDropContext, Droppable} from 'react-beautiful-dnd'
+
 class App extends React.Component {
   constructor(props){
     super(props);
@@ -33,7 +34,7 @@ class App extends React.Component {
   }
 
   onDragEnd = result => {
-    const {destination, source, draggableId} = result;
+    const {destination, source, draggableId, type} = result;
 
     if(!destination){
       return;
@@ -44,6 +45,15 @@ class App extends React.Component {
       ) {
         return;
       }
+
+    if(type === 'column'){
+      const newColumnOrder = [...this.state.columnOrder]//Array.from(this.state.columnOrder)
+      newColumnOrder.splice(source.index, 1);
+      newColumnOrder.splice(destination.index, 0, draggableId)
+
+      this.setState({columnOrder: newColumnOrder})
+      return;
+    }
 
     const startColumn = this.state.columns[source.droppableId];
     const finishColumn = this.state.columns[destination.droppableId];
@@ -57,26 +67,23 @@ class App extends React.Component {
         taskIds: newTaskIds,
       };
 
-      const newState = {
-        ...this.state,
+      this.setState({
         columns: {
           ...this.state.columns,
-          [newColumn.id]:newColumn
+          [newColumn.id]: newColumn
         }
-      };
-
-      this.setState(newState);
+      });
       return;
     }
 
-    const startTaskIds = Array.from(startColumn.taskIds);
+  const startTaskIds = Array.from(startColumn.taskIds);
   startTaskIds.splice(source.index,1);
   const newStartColumn = {
     ...startColumn,
     taskIds:startTaskIds
   };
 
-    const finishTaskIds = Array.from(finishColumn.taskIds);
+  const finishTaskIds = Array.from(finishColumn.taskIds);
   finishTaskIds.splice(destination.index, 0, draggableId);
     const newFinishColumn = {
     ...finishColumn,
@@ -84,7 +91,6 @@ class App extends React.Component {
   };
 
   const newState={
-  ...this.state,
   columns:{
     ...this.state.columns,
     [newStartColumn.id]: newStartColumn,
@@ -100,25 +106,40 @@ class App extends React.Component {
         <div className="app">
           <header>
             <nav className="navbar navbar-light bg-dark">
-              <a className="text-white navbar-brand" href="#top">Work In Progress</a>
+              <h2 className="text-white navbar-brand">Kanban</h2>
             </nav>
           </header>
           <div className="p-3 app">
-
-            <div className="row app">
-              <DragDropContext
-                onDragEnd={this.onDragEnd}
+            <DragDropContext
+              onDragEnd={this.onDragEnd}
+            >
+              <Droppable
+                droppableId="all-columns"
+                direction ="horizontal"
+                type="column"
               >
-                {this.state.columnOrder.map(columnId =>{
-                  const column= this.state.columns[columnId];
-                  const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
+                {provided => (
+                  <div className="row app"
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
 
-                  return <Column key = {column.id} column = {column} tasks ={tasks}/>
-                }
-                  )}
-             </DragDropContext>
-            </div>
+                    {this.state.columnOrder.map((columnId, index) =>{
+                      const column= this.state.columns[columnId];
+                      const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
 
+                      return <Column
+                        key = {column.id}
+                        column = {column}
+                        tasks = {tasks}
+                        index = {index}
+                        />
+                    }
+                      )}
+
+                  </div>)}
+            </Droppable>
+           </DragDropContext>
           </div>
         </div>
 
