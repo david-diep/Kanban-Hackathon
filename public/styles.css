@@ -1,3 +1,10 @@
 body{
-  color: green;
+  color: black;
+}
+
+.column {
+  color: black;
+  font-weight: bold;
+  align-content: center;
+  display: flex;
 }
