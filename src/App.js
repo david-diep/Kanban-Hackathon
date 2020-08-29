@@ -119,7 +119,8 @@ class App extends React.Component {
                 type="column"
               >
                 {provided => (
-                  <div className="row app"
+                  <div
+                    className="row app"
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                   >
