@@ -21,9 +21,14 @@ class Column extends React.Component {
             ref = {provided.innerRef}
             {...provided.draggableProps}
             >
-          <div className="w-100 border-bottom"
+          <div className="w-100 border-bottom d-flex justify-content-between"
             {...provided.dragHandleProps}>
             <h3 className="pt-2 pl-2">{this.props.column.title}</h3>
+            <div className={`m-2`}>
+              <button className={`btn btn-primary`}>
+                +
+              </button>
+            </div>
           </div>
           <Droppable droppableId={this.props.column.id}>
             {(provided, snapshot)=>(
