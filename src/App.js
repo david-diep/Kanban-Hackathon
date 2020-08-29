@@ -1,26 +1,129 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Column from './components/column'
+import {DragDropContext} from 'react-beautiful-dnd'
+class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      tasks:{
+        'task-1': { id: 'task-1', title:"1", content:"Take out the garbage."},
+        'task-2': { id: 'task-2', title: "2", content: "Charge my phone." },
+        'task-3': { id: 'task-3', title: "3", content: "Complete the hackathon." },
+        'task-4': { id: 'task-4', title: "4", content: "Get a job." }
+    },
+      columns:{
+        'column-1':{
+          id: 'column-1',
+          title:"To Do",
+          taskIds: ['task-1','task-2','task-3','task-4']
+        },
+        'column-2': {
+          id: 'column-2',
+          title: "In Progress",
+          taskIds: []
+        },
+        'column-3': {
+          id: 'column-3',
+          title: "Done",
+          taskIds: []
+        }
+      },
+      columnOrder: ['column-1', 'column-2', 'column-3']
+    }
+  }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  onDragEnd = result => {
+    const {destination, source, draggableId} = result;
+
+    if(!destination){
+      return;
+    }
+
+    if(destination.droppableId === source.droppableId &&
+      destination.index === source.index
+      ) {
+        return;
+      }
+
+    const startColumn = this.state.columns[source.droppableId];
+    const finishColumn = this.state.columns[destination.droppableId];
+    if(startColumn === finishColumn){ //if change is inside the same column
+      const newTaskIds = Array.from(startColumn.taskIds);
+      newTaskIds.splice(source.index,1);
+      newTaskIds.splice(destination.index, 0, draggableId);
+
+      const newColumn = {
+        ...startColumn,
+        taskIds: newTaskIds,
+      };
+
+      const newState = {
+        ...this.state,
+        columns: {
+          ...this.state.columns,
+          [newColumn.id]:newColumn
+        }
+      };
+
+      this.setState(newState);
+      return;
+    }
+
+    const startTaskIds = Array.from(startColumn.taskIds);
+  startTaskIds.splice(source.index,1);
+  const newStartColumn = {
+    ...startColumn,
+    taskIds:startTaskIds
+  };
+
+    const finishTaskIds = Array.from(finishColumn.taskIds);
+  finishTaskIds.splice(destination.index, 0, draggableId);
+    const newFinishColumn = {
+    ...finishColumn,
+    taskIds: finishTaskIds
+  };
+
+  const newState={
+  ...this.state,
+  columns:{
+    ...this.state.columns,
+    [newStartColumn.id]: newStartColumn,
+    [newFinishColumn.id]: newFinishColumn
+  }
 }
+  this.setState(newState);
+}
+  render(){
+
+    return (
+
+        <div className="app">
+          <header>
+            <nav className="navbar navbar-light bg-dark">
+              <a className="text-white navbar-brand" href="#top">Work In Progress</a>
+            </nav>
+          </header>
+          <div className="p-3 app">
+
+            <div className="row app">
+              <DragDropContext
+                onDragEnd={this.onDragEnd}
+              >
+                {this.state.columnOrder.map(columnId =>{
+                  const column= this.state.columns[columnId];
+                  const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
+
+                  return <Column key = {column.id} column = {column} tasks ={tasks}/>
+                }
+                  )}
+             </DragDropContext>
+            </div>
+
+          </div>
+        </div>
+
+
+    );
+}}
 
 export default App;
