@@ -139,7 +139,7 @@ class App extends React.Component {
 
                   </div>)}
             </Droppable>
-           </DragDropContext>
+          </DragDropContext>
           </div>
         </div>
 

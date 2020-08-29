@@ -8,7 +8,16 @@ class Column extends React.Component {
     return (
       <Draggable draggableId={this.props.column.id} index={this.props.index}>
         {(provided, snapshot) => (
-          <div className={`h-80 w-25 border border-secondary m-1 bg-white ${snapshot.isDragging ? 'highlighted-task' : ''}`}
+          <div
+            className={`
+              h-80
+              w-25
+              border
+              border-secondary
+              m-1
+              bg-white
+              ${snapshot.isDragging ? 'highlighted-task' : ''}
+            `}
             ref = {provided.innerRef}
             {...provided.draggableProps}
             >
@@ -18,7 +27,13 @@ class Column extends React.Component {
           </div>
           <Droppable droppableId={this.props.column.id}>
             {(provided, snapshot)=>(
-              <div className={`tasklist h-80 p-1 ${snapshot.isDraggingOver ? 'bg-info':''}`}
+              <div
+                className={`
+                  tasklist
+                  h-80
+                  p-1
+                  ${snapshot.isDraggingOver ? 'bg-info':''}
+                `}
                 ref={provided.innerRef}
                 {...provided.droppableProps}
                 >
