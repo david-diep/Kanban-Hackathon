@@ -4,12 +4,34 @@ export default class TaskDetails extends React.Component{
   constructor(props){
     super(props)
     this.handleClick= this.handleClick.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.state = {
+      title: this.props.task.title,
+      content: this.props.task.content
+    }
   }
 
   handleClick(e){
     if(e.target.id === 'overlay' || e.target.id=== 'save'){
-      this.props.displayTaskDetails(false, null)
+      this.closeModal()
     }
+  }
+
+  closeModal(){
+    this.props.displayTaskDetails(false, null)
+  }
+
+  handleChange(e){
+    const id = e.target.id
+    const value = e.target.value
+    this.setState({
+      [id]: value
+    })
+  }
+
+  handleSubmit(e){
+    e.preventDefault()
   }
 
   render(){
@@ -41,9 +63,28 @@ export default class TaskDetails extends React.Component{
           className="card w-75"
           tabIndex="0">
           <div className="card-body">
-            <h3 className="card-title">{this.props.task.title}</h3>
-            <p className="card-text">{this.props.task.content}</p>
-            <button onClick={this.handleClick} id="save" className="btn btn-primary">Save</button>
+            <form>
+              <input
+              type="text"
+              id="title"
+              className="form-control"
+              value={this.state.title}
+              onChange={this.handleChange}/>
+              <textarea
+                className="form-control"
+                value={this.state.content}
+                placeholder="Type here to add a description"
+                onChange={this.handleChange}
+                id="content"
+              />
+              <button
+                type="submit"
+                onSubmit={this.handleSubmit}
+                className="btn btn-primary"
+              >
+                Save
+              </button>
+            </form>
           </div>
         </div>
       </div>
