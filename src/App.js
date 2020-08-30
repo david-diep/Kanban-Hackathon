@@ -132,7 +132,6 @@ class App extends React.Component {
   }
 
   handleClick(e){
-    console.log(e.target.id)
     if(e.target.id === "add-column"){
       this.addColumn()
     }
