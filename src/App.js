@@ -42,22 +42,15 @@ class App extends React.Component {
         taskId: null
       }
     }
-    this.changeTaskTitle=this.changeTaskTitle.bind(this);
-    this.changeTaskText=this.changeTaskText.bind(this);
+    this.changeTaskData=this.changeTaskData.bind(this);
+
   }
 
-  changeTaskTitle(id,title){
+  changeTaskData(id, title, content){
     const newTasks = {...this.state.tasks}
-    const newTask = { id: id, title: title, content: newTasks[id].content}
+    const newTask = { id: id, title: title, content: content}
     newTasks[id]=newTask;
     this.setState({tasks:newTasks})
-  }
-
-  changeTaskText(id,content){
-    const newTasks = {...this.state.tasks}
-    const newTask = { id: id, title: newTasks[id].title, content: content }
-    newTasks[id] = newTask;
-    this.setState({ tasks: newTasks })
   }
 
   componentDidUpdate(prevState){
@@ -237,6 +230,7 @@ class App extends React.Component {
           </header>
           {this.state.taskDetails.display ?
           <TaskDetails
+            changeTaskData={this.changeTaskData}
             displayTaskDetails={this.displayTaskDetails}
             task={this.state.tasks[this.state.taskDetails.taskId]}
           /> :
