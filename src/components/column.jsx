@@ -28,13 +28,10 @@ class Column extends React.Component {
           <div
             className={`
               col-min
-              overflow-y
+              card
               h-80
               w-25
-              border
-              border-secondary
               m-1
-              bg-white
               ${snapshot.isDragging ? 'highlighted-task' : ''}
             `}
             ref = {provided.innerRef}
@@ -76,9 +73,8 @@ class Column extends React.Component {
                 key={task.id}
                 task={task}
                 index={index}
-                changeTaskText={this.props.changeTaskText}
-                changeTaskTitle={this.props.changeTaskTitle}
-                 />
+                displayTaskDetails={this.props.displayTaskDetails}
+                />
                 ))}
                 {provided.placeholder}
               </div>
