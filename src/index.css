@@ -6,6 +6,15 @@
   min-height:80vh;
 }
 
+.h-90{
+  height:93%!important;
+}
+
+.highlighted-task{
+  border-color:yellow!important;
+  border-width:7px!important;
+}
+
 .overflow-x{
   overflow-x: auto;
 }
