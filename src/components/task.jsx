@@ -16,6 +16,7 @@ class Task extends React.Component {
     this.onTextSave = this.onTextSave.bind(this);
     this.onTitleChange = this.onTitleChange.bind(this)
     this.onTextChange = this.onTextChange.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   onTitleClick(event){
@@ -48,6 +49,10 @@ class Task extends React.Component {
 
   }
 
+  handleClick(e){
+
+  }
+
   render() {
     const titleForm = (
       <form className="input-group" onSubmit={this.onTitleSave}>
@@ -68,22 +73,21 @@ class Task extends React.Component {
       <Draggable draggableId={this.props.task.id} index={this.props.index}>
         {(provided, snapshot) => (
           <div
+            onClick={this.handleClick}
             className={`
               border
               p-2
               m-2
               bg-light
+              card
               ${snapshot.isDragging ? 'highlighted-task':''}`
             }
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref = {provided.innerRef}
           >
-            <div className="border-bottom" onClick={this.onTitleClick}>
+            <div className="card-title">
               {this.state.editTitle ? titleForm : this.state.title}
-            </div>
-            <div onClick={this.onTextClick}>
-            {this.state.editText ? textForm : <p className="p-1" >{this.state.text}</p>}
             </div>
           </div>
         )}

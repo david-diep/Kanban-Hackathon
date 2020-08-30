@@ -19,3 +19,7 @@
 .navbar-space{
   height: 60px;
 }
+
+.max-z{
+  z-index: 999;
+}

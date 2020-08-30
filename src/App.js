@@ -11,10 +11,10 @@ class App extends React.Component {
     this.state={
       taskSerial: 5,
       tasks:{
-        'task-1': { id: 'task-1', title:"1", content:"Take out the garbage."},
-        'task-2': { id: 'task-2', title: "2", content: "Charge my phone." },
-        'task-3': { id: 'task-3', title: "3", content: "Complete the hackathon." },
-        'task-4': { id: 'task-4', title: "4", content: "Get a job." }
+        'task-1': { id: 'task-1', title:"Take out the garbage.", content:""},
+        'task-2': { id: 'task-2', title: "Charge my phone.", content: "" },
+        'task-3': { id: 'task-3', title: "Complete the hackathon.", content: "" },
+        'task-4': { id: 'task-4', title: "Complete the hackathon.", content: "" }
       },
       columnSerial: 4,
       columns:{
@@ -152,8 +152,8 @@ class App extends React.Component {
     const newTasks = JSON.parse(JSON.stringify(this.state.tasks))
     newTasks.[`task-${taskSerial}`] = {
       id: `task-${taskSerial}`,
-      title: `${taskSerial}`,
-      content: "New Card"
+      title: `Click to edit New Card`,
+      content: ""
     }
     const newColumns = JSON.parse(JSON.stringify(this.state.columns))
     newColumns[column].taskIds.unshift(`task-${taskSerial}`)
@@ -197,6 +197,7 @@ class App extends React.Component {
             <nav className={`
               navbar
               navbar-light
+              max-z
               bg-dark
               d-flex
               navbar-horizontal-fixed

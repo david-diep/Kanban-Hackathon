@@ -23,13 +23,10 @@ class Column extends React.Component {
           <div
             className={`
               col-min
-              overflow-y
+              card
               h-80
               w-25
-              border
-              border-secondary
               m-1
-              bg-white
               ${snapshot.isDragging ? 'highlighted-task' : ''}
             `}
             ref = {provided.innerRef}
