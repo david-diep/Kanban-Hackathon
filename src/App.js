@@ -34,10 +34,13 @@ class App extends React.Component {
           taskIds: []
         }
       },
-      columnOrder: ['column-1', 'column-2', 'column-3']
+      columnOrder: ['column-1', 'column-2', 'column-3'],
+      deleteColumnButton: false
     }
     this.changeTaskTitle=this.changeTaskTitle.bind(this);
     this.changeTaskText=this.changeTaskText.bind(this);
+    this.showDeleteColumn=this.showDeleteColumn.bind(this)
+    this.deleteColumn=this.deleteColumn.bind(this)
   }
 
   changeTaskTitle(id,title){
@@ -145,6 +148,24 @@ class App extends React.Component {
     }
   }
 
+  deleteColumn(id){
+    const newColumns={...this.state.columns}
+    const newTasks={...this.state.tasks}
+    const newColumnOrder=[...this.state.columnOrder]
+    const deleteOrderIndex= newColumnOrder.findIndex((col)=>col===id)
+    newColumnOrder.splice(deleteOrderIndex,1)
+    const deleteTasks=newColumns[id].taskIds;
+    for(let i=0; i<deleteTasks.length; i++){
+      delete newTasks[deleteTasks[i]]
+    }
+    delete newColumns[id];
+    this.setState({columns:newColumns,tasks:newTasks,columnOrder:newColumnOrder})
+  }
+
+  showDeleteColumn(){
+    this.setState(prevState=>{return {deleteColumnButton:!prevState.deleteColumnButton}})
+  }
+
   addColumn(){
     const columnSerial = this.state.columnSerial
     const newColumnSerial = columnSerial + 1
@@ -188,8 +209,9 @@ class App extends React.Component {
                   className="btn btn-primary"
                   id="add-column"
                 >
-                  +
+                <i className="fa fa-plus" aria-hidden="true"></i>
                 </button>
+              <button className="btn btn-danger ml-3" onClick={this.showDeleteColumn}><h5>Toggle Column Delete</h5></button>
               </div>
             </nav>
             {/* this is hacky and should be replaced with a better solution */}
@@ -222,6 +244,8 @@ class App extends React.Component {
                         index = {index}
                         changeTaskText = {this.changeTaskText}
                         changeTaskTitle = {this.changeTaskTitle}
+                        deleteColumn={this.deleteColumn}
+                        deleteColumnButton={this.state.deleteColumnButton}
                         />
                     })}
                   </div>)}

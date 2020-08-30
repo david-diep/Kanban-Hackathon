@@ -79,17 +79,12 @@ class Task extends React.Component {
             {...provided.dragHandleProps}
             ref = {provided.innerRef}
           >
-<<<<<<< HEAD
             <div className="border-bottom" onClick={this.onTitleClick}>
               {this.state.editTitle ? titleForm : this.state.title}
             </div>
             <div onClick={this.onTextClick}>
             {this.state.editText ? textForm : <p className="p-1" >{this.state.text}</p>}
             </div>
-=======
-            <div className="border-bottom">{this.props.task.title}</div>
-            <p className="p-1">{this.props.task.content}</p>
->>>>>>> ce98794e70a6c40aa07bb5720f75198a3272303e
           </div>
         )}
       </Draggable>
