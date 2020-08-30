@@ -42,7 +42,6 @@ class App extends React.Component {
     const newTasks = {...this.state.tasks}
     const newTask = { id: id, title: title, content: newTasks[id].content}
     newTasks[id]=newTask;
-    console.log(id,newTasks)
     this.setState({tasks:newTasks})
   }
 
@@ -50,7 +49,6 @@ class App extends React.Component {
     const newTasks = {...this.state.tasks}
     const newTask = { id: id, title: newTasks[id].title, content: content }
     newTasks[id] = newTask;
-    console.log(id, newTasks)
     this.setState({ tasks: newTasks })
   }
 

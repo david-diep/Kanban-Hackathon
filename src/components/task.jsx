@@ -4,8 +4,9 @@ import {Draggable} from 'react-beautiful-dnd'
 class Task extends React.Component {
   constructor(props){
     super(props);
-    this.state={ editTitle:false,
-        editText:false,
+    this.state={
+      editTitle:false,
+      editText:false,
       title: this.props.task.title,
       text: this.props.task.content
         }
@@ -28,7 +29,8 @@ class Task extends React.Component {
   onTitleSave(event) {
     event.preventDefault();
     this.props.changeTaskTitle(this.props.task.id, this.state.title)
-    this.setState({ editTitle: false})
+    this.setState({editTitle:false})
+
   }
 
   onTextChange(event) {
@@ -51,7 +53,7 @@ class Task extends React.Component {
       <form className="input-group" onSubmit={this.onTitleSave}>
         <input type="text" className="form-control" value={this.state.title} onChange={this.onTitleChange} ></input>
           <div className="input-group-append">
-            <button className="btn btn-primary" onClick={this.onTitleSave}>Save</button>
+            <button className="btn btn-primary">Save</button>
           </div>
       </form>);
 
@@ -78,10 +80,10 @@ class Task extends React.Component {
             ref = {provided.innerRef}
           >
             <div className="border-bottom" onClick={this.onTitleClick}>
-              {this.state.editTitle ? titleForm : this.props.task.title}
+              {this.state.editTitle ? titleForm : this.state.title}
             </div>
             <div onClick={this.onTextClick}>
-            {this.state.editText ? textForm : <p className="p-1" >{this.props.task.content}</p>}
+            {this.state.editText ? textForm : <p className="p-1" >{this.state.text}</p>}
             </div>
           </div>
         )}
