@@ -9,7 +9,6 @@ class Column extends React.Component {
   }
 
   handleClick(e){
-    console.log("handleClicked", e.target)
     const id = e.target.id
     const splitId = id.split('-')
     if(splitId[0] === "column"){

@@ -24,3 +24,7 @@ code {
   border-width:7px!important;
   border-color:yellow!important;
 }
+
+.overflow-x{
+  overflow-x: auto;
+}

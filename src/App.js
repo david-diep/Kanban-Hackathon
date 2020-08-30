@@ -6,6 +6,8 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.addCard = this.addCard.bind(this)
+    this.addColumn = this.addColumn.bind(this)
+    this.handleClick = this.handleClick.bind(this)
     this.state={
       taskSerial: 5,
       tasks:{
@@ -104,7 +106,6 @@ class App extends React.Component {
 }
 
   addCard(column){
-    console.log("add Card", column)
     let taskSerial = this.state.taskSerial
     const newTaskSerial = taskSerial + 1
     const newTasks = JSON.parse(JSON.stringify(this.state.tasks))
@@ -120,6 +121,16 @@ class App extends React.Component {
       tasks: newTasks,
       columns: newColumns
     })
+  }
+
+  handleClick(e){
+    console.log(e.target.id)
+    if(e.target.id === "add-column"){
+      console.log("will add id")
+    }
+  }
+
+  addColumn(){
 
   }
 
@@ -129,11 +140,27 @@ class App extends React.Component {
 
         <div className="app">
           <header>
-            <nav className="navbar navbar-light bg-dark">
+            <nav className={`navbar
+              navbar-light
+              bg-dark
+              d-flex
+              justify-content-between
+              align-items-center
+            `}>
               <h2 className="text-white navbar-brand">Kanban</h2>
+              <div>
+                <h5 className="text-white navbar-brand">Add New Column</h5>
+                <button
+                  onClick={this.handleClick}
+                  className="btn btn-primary"
+                  id="add-column"
+                >
+                  +
+                </button>
+              </div>
             </nav>
           </header>
-          <div className="p-3 app">
+          <div className="p-3 app overflow-x">
             <DragDropContext
               onDragEnd={this.onDragEnd}
             >
@@ -148,7 +175,6 @@ class App extends React.Component {
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                   >
-
                     {this.state.columnOrder.map((columnId, index) =>{
                       const column= this.state.columns[columnId];
                       const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
@@ -160,9 +186,7 @@ class App extends React.Component {
                         tasks = {tasks}
                         index = {index}
                         />
-                    }
-                      )}
-
+                    })}
                   </div>)}
             </Droppable>
           </DragDropContext>
