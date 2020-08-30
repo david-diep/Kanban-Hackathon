@@ -18,7 +18,7 @@ class Column extends React.Component {
           </div>
           <Droppable droppableId={this.props.column.id}>
             {(provided, snapshot)=>(
-              <div className={`tasklist h-80 p-1 ${snapshot.isDraggingOver ? 'bg-info':''}`}
+              <div className={`tasklist h-100 p-1 ${snapshot.isDraggingOver ? 'bg-info':''}`}
                 ref={provided.innerRef}
                 {...provided.droppableProps}
                 >

@@ -31,8 +31,16 @@ class App extends React.Component {
       },
       columnOrder: ['column-1', 'column-2', 'column-3']
     }
+    this.changeTaskTitle=this.changeTaskTitle.bind(this);
+    this.changeTaskText=this.changeTaskText.bind(this);
   }
 
+  changeTaskTitle(){
+
+  }
+  changeTaskText(){
+
+  }
   onDragEnd = result => {
     const {destination, source, draggableId, type} = result;
 
