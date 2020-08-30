@@ -11,12 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 .app{
- min-height:85vh;
+  min-height:85vh;
 }
+
 .h-80{
   min-height:80vh;
 }
+
 .highlighted-task{
   border-width:7px!important;
   border-color:yellow!important;

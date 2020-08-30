@@ -5,13 +5,16 @@ import {DragDropContext, Droppable} from 'react-beautiful-dnd'
 class App extends React.Component {
   constructor(props){
     super(props);
+    this.addCard = this.addCard.bind(this)
     this.state={
+      taskSerial: 5,
       tasks:{
         'task-1': { id: 'task-1', title:"1", content:"Take out the garbage."},
         'task-2': { id: 'task-2', title: "2", content: "Charge my phone." },
         'task-3': { id: 'task-3', title: "3", content: "Complete the hackathon." },
         'task-4': { id: 'task-4', title: "4", content: "Get a job." }
-    },
+      },
+      columnSerial: 4,
       columns:{
         'column-1':{
           id: 'column-1',
@@ -99,6 +102,27 @@ class App extends React.Component {
 }
   this.setState(newState);
 }
+
+  addCard(column){
+    console.log("add Card", column)
+    let taskSerial = this.state.taskSerial
+    const newTaskSerial = taskSerial + 1
+    const newTasks = JSON.parse(JSON.stringify(this.state.tasks))
+    newTasks.[`task-${taskSerial}`] = {
+      id: `task-${taskSerial}`,
+      title: `${taskSerial}`,
+      content: "New Card"
+    }
+    const newColumns = JSON.parse(JSON.stringify(this.state.columns))
+    newColumns[column].taskIds.unshift(`task-${taskSerial}`)
+    this.setState({
+      taskSerial: newTaskSerial,
+      tasks: newTasks,
+      columns: newColumns
+    })
+
+  }
+
   render(){
 
     return (
@@ -119,7 +143,8 @@ class App extends React.Component {
                 type="column"
               >
                 {provided => (
-                  <div className="row app"
+                  <div
+                    className="row app"
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                   >
@@ -129,6 +154,7 @@ class App extends React.Component {
                       const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
 
                       return <Column
+                        addCard={this.addCard}
                         key = {column.id}
                         column = {column}
                         tasks = {tasks}
@@ -139,7 +165,7 @@ class App extends React.Component {
 
                   </div>)}
             </Droppable>
-           </DragDropContext>
+          </DragDropContext>
           </div>
         </div>
 
