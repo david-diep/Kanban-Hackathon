@@ -6,6 +6,7 @@ class Column extends React.Component {
   constructor(props){
     super(props)
     this.handleClick = this.handleClick.bind(this)
+    this.deleteThisColumn=this.deleteThisColumn.bind(this)
   }
 
   handleClick(e){
@@ -14,6 +15,10 @@ class Column extends React.Component {
     if(splitId[0] === "column"){
       this.props.addCard(id)
     }
+  }
+
+  deleteThisColumn(){
+    this.props.deleteColumn(this.props.column.id)
   }
 
   render() {
@@ -44,8 +49,14 @@ class Column extends React.Component {
                 className={`btn btn-primary`}
                 onClick={this.handleClick}
               >
-                +
-              </button>
+              <i className="fa fa-plus" aria-hidden="true"></i>
+               </button>
+                {this.props.deleteColumnButton &&
+                <button
+                className="btn btn-outline-danger ml-2"
+                onClick={this.deleteThisColumn}>
+                  <i className="fa fa-trash" aria-hidden="true"></i>
+                </button>}
             </div>
           </div>
           <Droppable droppableId={this.props.column.id}>
