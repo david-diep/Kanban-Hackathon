@@ -10,13 +10,17 @@ class App extends React.Component {
     this.addColumn = this.addColumn.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.displayTaskDetails = this.displayTaskDetails.bind(this)
+    this.changeTaskData = this.changeTaskData.bind(this);
+    this.showDeleteColumn = this.showDeleteColumn.bind(this);
+    this.deleteColumn = this.deleteColumn.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
     this.state={
       taskSerial: 5,
       tasks:{
         'task-1': { id: 'task-1', title:"Take out the garbage.", content:""},
         'task-2': { id: 'task-2', title: "Charge my phone.", content: "" },
         'task-3': { id: 'task-3', title: "Complete the hackathon.", content: "" },
-        'task-4': { id: 'task-4', title: "Complete the hackathon.", content: "" }
+        'task-4': { id: 'task-4', title: "Get a job.", content: "" }
       },
       columnSerial: 4,
       columns:{
@@ -44,9 +48,7 @@ class App extends React.Component {
       deleteColumnButton: false
     }
 
-    this.changeTaskData=this.changeTaskData.bind(this);
-    this.showDeleteColumn=this.showDeleteColumn.bind(this)
-    this.deleteColumn=this.deleteColumn.bind(this)
+
   }
 
   changeTaskData(id, title, content){
@@ -69,6 +71,20 @@ class App extends React.Component {
       taskId: taskId
     }
     this.setState({taskDetails: newTaskDetails})
+  }
+
+  deleteTask(id){
+    const newTasks ={...this.state.tasks}
+    delete newTasks[id];
+    const newColumns={...this.state.columns}
+    for(let column in newColumns){
+      const deleteIndex = newColumns[column].taskIds.findIndex((taskId)=>taskId===id)
+      if(deleteIndex>=0){
+        newColumns[column].taskIds.splice(deleteIndex,1)
+        break;
+      }
+    }
+    this.setState({tasks:newTasks,columns:newColumns})
   }
 
   componentDidMount(){
@@ -187,9 +203,9 @@ class App extends React.Component {
     const newColumnOrder=[...this.state.columnOrder]
     const deleteOrderIndex= newColumnOrder.findIndex((col)=>col===id)
     newColumnOrder.splice(deleteOrderIndex,1)
-    const deleteTasks=newColumns[id].taskIds;
-    for(let i=0; i<deleteTasks.length; i++){
-      delete newTasks[deleteTasks[i]]
+    const deleteToTasks=newColumns[id].taskIds;
+    for(let i=0; i<deleteToTasks.length; i++){
+      delete newTasks[deleteToTasks[i]]
     }
     delete newColumns[id];
     this.setState({columns:newColumns,tasks:newTasks,columnOrder:newColumnOrder})
@@ -236,7 +252,7 @@ class App extends React.Component {
             >
               <h2 className="text-white navbar-brand">Kanban</h2>
               <div>
-                <h5 className="text-white navbar-brand">Add New Column</h5>
+              <h5 className="text-white navbar-brand">Add New Column</h5>
                 <button
                   onClick={this.handleClick}
                   className="btn btn-primary"
@@ -250,13 +266,13 @@ class App extends React.Component {
             {/* this is hacky and should be replaced with a better solution */}
             <div className="navbar-space"></div>
           </header>
-          {this.state.taskDetails.display ?
+          {this.state.taskDetails.display &&
           <TaskDetails
             changeTaskData={this.changeTaskData}
             displayTaskDetails={this.displayTaskDetails}
             task={this.state.tasks[this.state.taskDetails.taskId]}
-          /> :
-          <></>}
+            deleteTask={this.deleteTask}
+          /> }
           <div className="p-3 app">
             <DragDropContext
               onDragEnd={this.onDragEnd}

@@ -3,12 +3,14 @@ import React from 'react'
 export default class TaskDetails extends React.Component{
   constructor(props){
     super(props)
-    this.handleClick= this.handleClick.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.state = {
       title: this.props.task.title,
       content: this.props.task.content
     }
+
   }
 
   handleClick(e){
@@ -19,6 +21,11 @@ export default class TaskDetails extends React.Component{
       this.props.changeTaskData(this.props.task.id, this.state.title, this.state.content)
       this.closeModal()
     }
+  }
+
+  handleDelete(){
+    this.closeModal();
+    this.props.deleteTask(this.props.task.id)
   }
 
   closeModal(){
@@ -81,6 +88,12 @@ export default class TaskDetails extends React.Component{
                 className="btn btn-primary"
               >
                 Save
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={this.handleDelete}
+                >
+                Delete
               </button>
           </div>
         </div>
