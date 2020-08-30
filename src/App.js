@@ -47,8 +47,11 @@ class App extends React.Component {
 
   }
 
-  updateLocalStorage(){
-
+  componentDidUpdate(prevState){
+    if(this.state !== prevState){
+      const appState = JSON.stringify(this.state)
+      localStorage.savedState= appState
+    }
   }
 
   componentDidMount(){
@@ -56,7 +59,6 @@ class App extends React.Component {
     if(!savedState){
       const state = JSON.stringify(this.state)
       localStorage.savedState = state
-      console.log(localStorage.savedState)
       return
     } else {
       savedState = JSON.parse(savedState)
