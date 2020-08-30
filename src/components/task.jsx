@@ -12,7 +12,14 @@ class Task extends React.Component {
     return (
       <Draggable draggableId={this.props.task.id} index={this.props.index}>
         {(provided, snapshot) => (
-          <div className={`border p-2 m-2 bg-light ${snapshot.isDragging ? 'highlighted-task':''}`}
+          <div
+            className={`
+              border
+              p-2
+              m-2
+              bg-light
+              ${snapshot.isDragging ? 'highlighted-task':''}`
+            }
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
