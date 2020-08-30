@@ -2,6 +2,7 @@ import React from 'react';
 import Column from './components/column'
 import {DragDropContext, Droppable} from 'react-beautiful-dnd'
 import TaskDetails from './components/task-details'
+import ContextMenu from './components/context-menu'
 
 class App extends React.Component {
   constructor(props){
@@ -14,6 +15,7 @@ class App extends React.Component {
     this.showDeleteColumn = this.showDeleteColumn.bind(this);
     this.deleteColumn = this.deleteColumn.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
+    this.displayContext = this.displayContext.bind(this)
     this.state={
       taskSerial: 5,
       tasks:{
@@ -45,7 +47,12 @@ class App extends React.Component {
         display: false,
         taskId: null
       },
-      deleteColumnButton: false
+      deleteColumnButton: false,
+      displayContext:{
+        display: false,
+        contextId: null,
+        pos:{}
+      }
     }
 
 
@@ -57,6 +64,21 @@ class App extends React.Component {
     newTasks[id]=newTask;
     this.setState({tasks:newTasks})
   }
+
+  displayContext(display, contextId, xPos, yPos){
+    console.log("app Display context", display, contextId, xPos, yPos)
+    this.setState({
+      displayContext:{
+        display: display,
+        contextId: contextId,
+        pos: {
+          xPos: xPos,
+          yPos: yPos
+        }
+      }
+    })
+  }
+
 
   componentDidUpdate(prevState){
     if(this.state !== prevState){
@@ -101,7 +123,12 @@ class App extends React.Component {
         columnSerial: savedState.columnSerial,
         columns: savedState.columns,
         columnOrder: savedState.columnOrder,
-        taskDetails: {display: false, taskId: null}
+        taskDetails: {display: false, taskId: null},
+        displayContext: {
+          display: false,
+          contextId: null,
+          pos: {}
+        }
       })
     }
   }
@@ -236,7 +263,14 @@ class App extends React.Component {
   render(){
 
     return (
+
         <div className="app overflow-x">
+          {this.state.displayContext.display ?
+            <ContextMenu
+              pos={this.state.displayContext.pos}
+              id={this.state.displayContext.contextId}
+            /> :
+            <></>}
           <header>
             <nav className={`
               navbar
@@ -293,6 +327,7 @@ class App extends React.Component {
                       const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
 
                       return <Column
+                        displayContext={this.displayContext}
                         addCard={this.addCard}
                         key = {column.id}
                         column = {column}

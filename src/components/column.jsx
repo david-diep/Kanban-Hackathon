@@ -7,6 +7,7 @@ class Column extends React.Component {
     super(props)
     this.handleClick = this.handleClick.bind(this)
     this.deleteThisColumn=this.deleteThisColumn.bind(this)
+    this.handleContext=this.handleContext.bind(this)
   }
 
   handleClick(e){
@@ -17,26 +18,37 @@ class Column extends React.Component {
     }
   }
 
+  handleContext(e){
+    e.preventDefault()
+    console.log("context'd!")
+    const xPos = e.pageX
+    const yPos = e.pageY
+    console.log("x", xPos, "y", yPos)
+    this.props.displayContext(true, this.props.column.id, xPos, yPos)
+  }
+
   deleteThisColumn(){
     this.props.deleteColumn(this.props.column.id)
   }
 
   render() {
     return (
+
       <Draggable draggableId={this.props.column.id} index={this.props.index}>
         {(provided, snapshot) => (
           <div
-            className={`
-              col-min
-              card
-              h-80
-              w-25
-              m-1
-              ${snapshot.isDragging ? 'highlighted-task' : ''}
-            `}
-            ref = {provided.innerRef}
-            {...provided.draggableProps}
-            >
+          className={`
+          col-min
+          card
+          h-80
+          w-25
+          m-1
+          ${snapshot.isDragging ? 'highlighted-task' : ''}
+          `}
+          onContextMenu={this.handleContext}
+          ref = {provided.innerRef}
+          {...provided.draggableProps}
+          >
           <div className="w-100 border-bottom d-flex justify-content-between"
             {...provided.dragHandleProps}>
             <h3 className="pt-2 pl-2">{this.props.column.title}</h3>
@@ -45,9 +57,9 @@ class Column extends React.Component {
                 id={this.props.column.id}
                 className={`btn btn-primary`}
                 onClick={this.handleClick}
-              >
+                >
               <i className="fa fa-plus" aria-hidden="true"></i>
-               </button>
+              </button>
                 {this.props.deleteColumnButton &&
                 <button
                 className="btn btn-outline-danger ml-2"
@@ -59,23 +71,23 @@ class Column extends React.Component {
           <Droppable droppableId={this.props.column.id}>
             {(provided, snapshot)=>(
               <div
-                className={`
-                  tasklist
-                  h-80
-                  p-1
-                  ${snapshot.isDraggingOver ? 'bg-info':''}
-                `}
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                >
+              className={`
+              tasklist
+              h-80
+              p-1
+              ${snapshot.isDraggingOver ? 'bg-info':''}
+              `}
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              >
                 {this.props.tasks.map((task, index) => (
-                <Task
-                key={task.id}
-                task={task}
-                index={index}
-                displayTaskDetails={this.props.displayTaskDetails}
-                />
-                ))}
+                  <Task
+                  key={task.id}
+                  task={task}
+                  index={index}
+                  displayTaskDetails={this.props.displayTaskDetails}
+                  />
+                  ))}
                 {provided.placeholder}
               </div>
             )}
