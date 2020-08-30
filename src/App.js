@@ -1,6 +1,7 @@
 import React from 'react';
 import Column from './components/column'
 import {DragDropContext, Droppable} from 'react-beautiful-dnd'
+import TaskDetails from './components/task-details'
 
 class App extends React.Component {
   constructor(props){
@@ -34,7 +35,11 @@ class App extends React.Component {
           taskIds: []
         }
       },
-      columnOrder: ['column-1', 'column-2', 'column-3']
+      columnOrder: ['column-1', 'column-2', 'column-3'],
+      taskDetails:{
+        display: false,
+        taskId: null
+      }
     }
     this.changeTaskTitle=this.changeTaskTitle.bind(this);
     this.changeTaskText=this.changeTaskText.bind(this);
@@ -191,7 +196,6 @@ class App extends React.Component {
   render(){
 
     return (
-
         <div className="app overflow-x">
           <header>
             <nav className={`
@@ -221,6 +225,9 @@ class App extends React.Component {
             {/* this is hacky and should be replaced with a better solution */}
             <div className="navbar-space"></div>
           </header>
+          {this.state.taskDetails.display ?
+          <TaskDetails task={this.state.tasks[this.state.taskDetails.taskId]}/> :
+          <></>}
           <div className="p-3 app">
             <DragDropContext
               onDragEnd={this.onDragEnd}
