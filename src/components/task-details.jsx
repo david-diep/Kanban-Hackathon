@@ -4,7 +4,6 @@ export default class TaskDetails extends React.Component{
   constructor(props){
     super(props)
     this.handleClick= this.handleClick.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.state = {
       title: this.props.task.title,
@@ -13,13 +12,18 @@ export default class TaskDetails extends React.Component{
   }
 
   handleClick(e){
-    if(e.target.id === 'overlay' || e.target.id=== 'save'){
+    if(e.target.id === 'overlay'){
+      this.closeModal()
+    }
+    if(e.target.id === 'save'){
+      this.props.changeTaskData(this.props.task.id, this.state.title, this.state.content)
       this.closeModal()
     }
   }
 
   closeModal(){
     this.props.displayTaskDetails(false, null)
+    console.log("this.state", this.state, "props id", this.props.task.id)
   }
 
   handleChange(e){
@@ -28,10 +32,6 @@ export default class TaskDetails extends React.Component{
     this.setState({
       [id]: value
     })
-  }
-
-  handleSubmit(e){
-    e.preventDefault()
   }
 
   render(){
@@ -63,7 +63,6 @@ export default class TaskDetails extends React.Component{
           className="card w-75"
           tabIndex="0">
           <div className="card-body">
-            <form>
               <input
               type="text"
               id="title"
@@ -78,13 +77,12 @@ export default class TaskDetails extends React.Component{
                 id="content"
               />
               <button
-                type="submit"
-                onSubmit={this.handleSubmit}
+                id="save"
+                onClick={this.handleClick}
                 className="btn btn-primary"
               >
                 Save
               </button>
-            </form>
           </div>
         </div>
       </div>
