@@ -1,6 +1,7 @@
 import React from 'react';
 import Column from './components/column'
 import {DragDropContext, Droppable} from 'react-beautiful-dnd'
+import TaskDetails from './components/task-details'
 
 class App extends React.Component {
   constructor(props){
@@ -8,13 +9,14 @@ class App extends React.Component {
     this.addCard = this.addCard.bind(this)
     this.addColumn = this.addColumn.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.displayTaskDetails = this.displayTaskDetails.bind(this)
     this.state={
       taskSerial: 5,
       tasks:{
-        'task-1': { id: 'task-1', title:"1", content:"Take out the garbage."},
-        'task-2': { id: 'task-2', title: "2", content: "Charge my phone." },
-        'task-3': { id: 'task-3', title: "3", content: "Complete the hackathon." },
-        'task-4': { id: 'task-4', title: "4", content: "Get a job." }
+        'task-1': { id: 'task-1', title:"Take out the garbage.", content:""},
+        'task-2': { id: 'task-2', title: "Charge my phone.", content: "" },
+        'task-3': { id: 'task-3', title: "Complete the hackathon.", content: "" },
+        'task-4': { id: 'task-4', title: "Complete the hackathon.", content: "" }
       },
       columnSerial: 4,
       columns:{
@@ -35,26 +37,23 @@ class App extends React.Component {
         }
       },
       columnOrder: ['column-1', 'column-2', 'column-3'],
+      taskDetails:{
+        display: false,
+        taskId: null
+      },
       deleteColumnButton: false
     }
-    this.changeTaskTitle=this.changeTaskTitle.bind(this);
-    this.changeTaskText=this.changeTaskText.bind(this);
+
+    this.changeTaskData=this.changeTaskData.bind(this);
     this.showDeleteColumn=this.showDeleteColumn.bind(this)
     this.deleteColumn=this.deleteColumn.bind(this)
   }
 
-  changeTaskTitle(id,title){
-    const newTasks = {...this.state.tasks}
-    const newTask = { id: id, title: title, content: newTasks[id].content}
+  changeTaskData(id, title, content){
+    const newTasks = JSON.parse(JSON.stringify(this.state.tasks))
+    const newTask = { id: id, title: title, content: content}
     newTasks[id]=newTask;
     this.setState({tasks:newTasks})
-  }
-
-  changeTaskText(id,content){
-    const newTasks = {...this.state.tasks}
-    const newTask = { id: id, title: newTasks[id].title, content: content }
-    newTasks[id] = newTask;
-    this.setState({ tasks: newTasks })
   }
 
   componentDidUpdate(prevState){
@@ -62,6 +61,14 @@ class App extends React.Component {
       const appState = JSON.stringify(this.state)
       localStorage.savedState= appState
     }
+  }
+
+  displayTaskDetails(bool, taskId){
+    const newTaskDetails = {
+      display: bool,
+      taskId: taskId
+    }
+    this.setState({taskDetails: newTaskDetails})
   }
 
   componentDidMount(){
@@ -77,7 +84,8 @@ class App extends React.Component {
         tasks: savedState.tasks,
         columnSerial: savedState.columnSerial,
         columns: savedState.columns,
-        columnOrder: savedState.columnOrder
+        columnOrder: savedState.columnOrder,
+        taskDetails: {display: false, taskId: null}
       })
     }
   }
@@ -155,8 +163,8 @@ class App extends React.Component {
     const newTasks = JSON.parse(JSON.stringify(this.state.tasks))
     newTasks.[`task-${taskSerial}`] = {
       id: `task-${taskSerial}`,
-      title: `${taskSerial}`,
-      content: "New Card"
+      title: `Click to edit New Card`,
+      content: ""
     }
     const newColumns = JSON.parse(JSON.stringify(this.state.columns))
     newColumns[column].taskIds.unshift(`task-${taskSerial}`)
@@ -212,12 +220,12 @@ class App extends React.Component {
   render(){
 
     return (
-
         <div className="app overflow-x">
           <header>
             <nav className={`
               navbar
               navbar-light
+              nav-z
               bg-dark
               d-flex
               navbar-horizontal-fixed
@@ -242,6 +250,13 @@ class App extends React.Component {
             {/* this is hacky and should be replaced with a better solution */}
             <div className="navbar-space"></div>
           </header>
+          {this.state.taskDetails.display ?
+          <TaskDetails
+            changeTaskData={this.changeTaskData}
+            displayTaskDetails={this.displayTaskDetails}
+            task={this.state.tasks[this.state.taskDetails.taskId]}
+          /> :
+          <></>}
           <div className="p-3 app">
             <DragDropContext
               onDragEnd={this.onDragEnd}
@@ -267,8 +282,7 @@ class App extends React.Component {
                         column = {column}
                         tasks = {tasks}
                         index = {index}
-                        changeTaskText = {this.changeTaskText}
-                        changeTaskTitle = {this.changeTaskTitle}
+                        displayTaskDetails= {this.displayTaskDetails}
                         deleteColumn={this.deleteColumn}
                         deleteColumnButton={this.state.deleteColumnButton}
                         />
