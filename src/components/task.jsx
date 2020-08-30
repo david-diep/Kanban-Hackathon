@@ -4,7 +4,7 @@ import {Draggable} from 'react-beautiful-dnd'
 class Task extends React.Component {
   constructor(props){
     super(props);
-    this.state={editTitle:false, editTitle:false}
+    this.state={editTitle:false}
   }
 
   render() {
