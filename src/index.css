@@ -3,7 +3,7 @@
 }
 
 .h-80{
-  min-height:85vh;
+  min-height:80vh;
 }
 
 .overflow-x{
@@ -19,10 +19,6 @@
 .highlighted-task{
   border-color:yellow!important;
   border-width:7px!important;
-}
-
-.h-90{
-  height:93%!important;
 }
 
 .navbar-space{
