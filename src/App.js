@@ -38,12 +38,22 @@ class App extends React.Component {
     this.changeTaskText=this.changeTaskText.bind(this);
   }
 
-  changeTaskTitle(){
-
+  changeTaskTitle(id,title){
+    const newTasks = {...this.state.tasks}
+    const newTask = { id: id, title: title, content: newTasks[id].content}
+    newTasks[id]=newTask;
+    console.log(id,newTasks)
+    this.setState({tasks:newTasks})
   }
-  changeTaskText(){
 
+  changeTaskText(id,content){
+    const newTasks = {...this.state.tasks}
+    const newTask = { id: id, title: newTasks[id].title, content: content }
+    newTasks[id] = newTask;
+    console.log(id, newTasks)
+    this.setState({ tasks: newTasks })
   }
+
   onDragEnd = result => {
     const {destination, source, draggableId, type} = result;
 
@@ -152,7 +162,7 @@ class App extends React.Component {
               >
                 {provided => (
                   <div
-                    className="row app"
+                    className="row app h-80"
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                   >
@@ -167,6 +177,8 @@ class App extends React.Component {
                         column = {column}
                         tasks = {tasks}
                         index = {index}
+                        changeTaskText = {this.changeTaskText}
+                        changeTaskTitle = {this.changeTaskTitle}
                         />
                     }
                       )}
