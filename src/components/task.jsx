@@ -8,7 +8,7 @@ class Task extends React.Component {
   }
 
   handleClick(e){
-
+    this.props.displayTaskDetails(true, this.props.task.id)
   }
 
   render() {

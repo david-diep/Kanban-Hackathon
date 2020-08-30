@@ -64,7 +64,8 @@ class Column extends React.Component {
                 index={index}
                 changeTaskText={this.props.changeTaskText}
                 changeTaskTitle={this.props.changeTaskTitle}
-                 />
+                displayTaskDetails={this.props.displayTaskDetails}
+                />
                 ))}
                 {provided.placeholder}
               </div>

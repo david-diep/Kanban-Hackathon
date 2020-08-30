@@ -9,6 +9,7 @@ class App extends React.Component {
     this.addCard = this.addCard.bind(this)
     this.addColumn = this.addColumn.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.displayTaskDetails = this.displayTaskDetails.bind(this)
     this.state={
       taskSerial: 5,
       tasks:{
@@ -66,6 +67,14 @@ class App extends React.Component {
     }
   }
 
+  displayTaskDetails(bool, taskId){
+    const newTaskDetails = {
+      display: bool,
+      taskId: taskId
+    }
+    this.setState({taskDetails: newTaskDetails})
+  }
+
   componentDidMount(){
     let savedState = localStorage.savedState
     if(!savedState){
@@ -79,7 +88,8 @@ class App extends React.Component {
         tasks: savedState.tasks,
         columnSerial: savedState.columnSerial,
         columns: savedState.columns,
-        columnOrder: savedState.columnOrder
+        columnOrder: savedState.columnOrder,
+        taskDetails: {display: false, taskId: null}
       })
     }
   }
@@ -226,7 +236,10 @@ class App extends React.Component {
             <div className="navbar-space"></div>
           </header>
           {this.state.taskDetails.display ?
-          <TaskDetails task={this.state.tasks[this.state.taskDetails.taskId]}/> :
+          <TaskDetails
+            displayTaskDetails={this.displayTaskDetails}
+            task={this.state.tasks[this.state.taskDetails.taskId]}
+          /> :
           <></>}
           <div className="p-3 app">
             <DragDropContext
@@ -255,6 +268,7 @@ class App extends React.Component {
                         index = {index}
                         changeTaskText = {this.changeTaskText}
                         changeTaskTitle = {this.changeTaskTitle}
+                        displayTaskDetails= {this.displayTaskDetails}
                         />
                     })}
                   </div>)}
