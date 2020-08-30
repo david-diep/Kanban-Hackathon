@@ -6,6 +6,8 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.addCard = this.addCard.bind(this)
+    this.addColumn = this.addColumn.bind(this)
+    this.handleClick = this.handleClick.bind(this)
     this.state={
       taskSerial: 5,
       tasks:{
@@ -112,7 +114,6 @@ class App extends React.Component {
 }
 
   addCard(column){
-    console.log("add Card", column)
     let taskSerial = this.state.taskSerial
     const newTaskSerial = taskSerial + 1
     const newTasks = JSON.parse(JSON.stringify(this.state.tasks))
@@ -128,18 +129,64 @@ class App extends React.Component {
       tasks: newTasks,
       columns: newColumns
     })
+  }
 
+  handleClick(e){
+    console.log(e.target.id)
+    if(e.target.id === "add-column"){
+      this.addColumn()
+    }
+  }
+
+  addColumn(){
+    const columnSerial = this.state.columnSerial
+    const newColumnSerial = columnSerial + 1
+    const newColumns = JSON.parse(JSON.stringify(this.state.columns))
+    const newColumnOrder = this.state.columnOrder.splice(0)
+    newColumns[`column-${columnSerial}`] = {
+      id: `column-${columnSerial}`,
+      title: 'New Column',
+      taskIds: []
+    }
+    newColumnOrder.push(`column-${columnSerial}`)
+    this.setState({
+      columns: newColumns,
+      columnSerial: newColumnSerial,
+      columnOrder: newColumnOrder
+    })
   }
 
   render(){
 
     return (
 
-        <div className="app">
+        <div className="app overflow-x">
           <header>
-            <nav className="navbar navbar-light bg-dark">
+            <nav className={`
+              navbar
+              navbar-light
+              bg-dark
+              d-flex
+              navbar-horizontal-fixed
+              justify-content-between
+              align-items-center
+            `}
+            id="navbar"
+            >
               <h2 className="text-white navbar-brand">Kanban</h2>
+              <div>
+                <h5 className="text-white navbar-brand">Add New Column</h5>
+                <button
+                  onClick={this.handleClick}
+                  className="btn btn-primary"
+                  id="add-column"
+                >
+                  +
+                </button>
+              </div>
             </nav>
+            {/* this is hacky and should be replaced with a better solution */}
+            <div className="navbar-space"></div>
           </header>
           <div className="p-3 app">
             <DragDropContext
@@ -152,11 +199,10 @@ class App extends React.Component {
               >
                 {provided => (
                   <div
-                    className="row app"
+                    className="row flex-nowrap"
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                   >
-
                     {this.state.columnOrder.map((columnId, index) =>{
                       const column= this.state.columns[columnId];
                       const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
@@ -168,9 +214,7 @@ class App extends React.Component {
                         tasks = {tasks}
                         index = {index}
                         />
-                    }
-                      )}
-
+                    })}
                   </div>)}
             </Droppable>
           </DragDropContext>
