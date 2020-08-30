@@ -23,7 +23,6 @@ export default class TaskDetails extends React.Component{
 
   closeModal(){
     this.props.displayTaskDetails(false, null)
-    console.log("this.state", this.state, "props id", this.props.task.id)
   }
 
   handleChange(e){
@@ -66,11 +65,11 @@ export default class TaskDetails extends React.Component{
               <input
               type="text"
               id="title"
-              className="form-control"
+              className="form-control-lg"
               value={this.state.title}
               onChange={this.handleChange}/>
               <textarea
-                className="form-control"
+                className="form-control text-dark"
                 value={this.state.content}
                 placeholder="Type here to add a description"
                 onChange={this.handleChange}
