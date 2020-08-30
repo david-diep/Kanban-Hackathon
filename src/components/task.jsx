@@ -24,7 +24,7 @@ class Task extends React.Component {
             {...provided.dragHandleProps}
             ref={provided.innerRef}
           >
-            <div className="border-bottom">{{this.props.task.title}}</div>
+            <div className="border-bottom">{this.props.task.title}</div>
             <p className="p-1">{this.props.task.content}</p>
           </div>
         )}
