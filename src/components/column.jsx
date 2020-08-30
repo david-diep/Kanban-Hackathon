@@ -64,7 +64,7 @@ class Column extends React.Component {
               <div
                 className={`
                   tasklist
-                  h-90
+                  h-80
                   p-1
                   ${snapshot.isDraggingOver ? 'bg-info':''}
                 `}
