@@ -16,6 +16,11 @@
   right: 0;
 }
 
+.highlighted-task{
+  border-color:yellow!important;
+  border-width:7px!important;
+}
+
 .navbar-space{
   height: 60px;
 }
