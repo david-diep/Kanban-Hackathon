@@ -126,12 +126,27 @@ class App extends React.Component {
   handleClick(e){
     console.log(e.target.id)
     if(e.target.id === "add-column"){
-      console.log("will add id")
+      this.addColumn()
     }
   }
 
   addColumn(){
-
+    const columnSerial = this.state.columnSerial
+    const newColumnSerial = columnSerial + 1
+    const newColumns = JSON.parse(JSON.stringify(this.state.columns))
+    const newColumnOrder = this.state.columnOrder.splice(0)
+    console.log(columnSerial, newColumns, newColumnOrder)
+    newColumns[`column-${columnSerial}`] = {
+      id: `column-${columnSerial}`,
+      title: 'New Column',
+      taskIds: []
+    }
+    newColumnOrder.push(`column-${columnSerial}`)
+    this.setState({
+      columns: newColumns,
+      columnSerial: newColumnSerial,
+      columnOrder: newColumnOrder
+    })
   }
 
   render(){
