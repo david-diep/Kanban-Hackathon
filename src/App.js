@@ -40,11 +40,18 @@ class App extends React.Component {
     this.changeTaskText=this.changeTaskText.bind(this);
   }
 
-  changeTaskTitle(){
-
+  changeTaskTitle(id,title){
+    const newTasks = {...this.state.tasks}
+    const newTask = { id: id, title: title, content: newTasks[id].content}
+    newTasks[id]=newTask;
+    this.setState({tasks:newTasks})
   }
-  changeTaskText(){
 
+  changeTaskText(id,content){
+    const newTasks = {...this.state.tasks}
+    const newTask = { id: id, title: newTasks[id].title, content: content }
+    newTasks[id] = newTask;
+    this.setState({ tasks: newTasks })
   }
 
   componentDidUpdate(prevState){
@@ -238,6 +245,8 @@ class App extends React.Component {
                         column = {column}
                         tasks = {tasks}
                         index = {index}
+                        changeTaskText = {this.changeTaskText}
+                        changeTaskTitle = {this.changeTaskTitle}
                         />
                     })}
                   </div>)}
