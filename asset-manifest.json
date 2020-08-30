@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/kanban-hackathon/static/css/main.da9b9c07.chunk.css",
+    "main.js": "/kanban-hackathon/static/js/main.3ff6e1c6.chunk.js",
+    "main.js.map": "/kanban-hackathon/static/js/main.3ff6e1c6.chunk.js.map",
+    "runtime-main.js": "/kanban-hackathon/static/js/runtime-main.8b26f085.js",
+    "runtime-main.js.map": "/kanban-hackathon/static/js/runtime-main.8b26f085.js.map",
+    "static/js/2.b5386be6.chunk.js": "/kanban-hackathon/static/js/2.b5386be6.chunk.js",
+    "static/js/2.b5386be6.chunk.js.map": "/kanban-hackathon/static/js/2.b5386be6.chunk.js.map",
+    "index.html": "/kanban-hackathon/index.html",
+    "precache-manifest.7b646270fa28e8a3ab9f2cf89e3d08f9.js": "/kanban-hackathon/precache-manifest.7b646270fa28e8a3ab9f2cf89e3d08f9.js",
+    "service-worker.js": "/kanban-hackathon/service-worker.js",
+    "static/css/main.da9b9c07.chunk.css.map": "/kanban-hackathon/static/css/main.da9b9c07.chunk.css.map",
+    "static/js/2.b5386be6.chunk.js.LICENSE.txt": "/kanban-hackathon/static/js/2.b5386be6.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8b26f085.js",
+    "static/js/2.b5386be6.chunk.js",
+    "static/css/main.da9b9c07.chunk.css",
+    "static/js/main.3ff6e1c6.chunk.js"
+  ]
+}
