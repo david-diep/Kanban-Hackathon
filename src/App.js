@@ -54,6 +54,31 @@ class App extends React.Component {
     this.setState({ tasks: newTasks })
   }
 
+  componentDidUpdate(prevState){
+    if(this.state !== prevState){
+      const appState = JSON.stringify(this.state)
+      localStorage.savedState= appState
+    }
+  }
+
+  componentDidMount(){
+    let savedState = localStorage.savedState
+    if(!savedState){
+      const state = JSON.stringify(this.state)
+      localStorage.savedState = state
+      return
+    } else {
+      savedState = JSON.parse(savedState)
+      this.setState({
+        taskSerial: savedState.taskSerial,
+        tasks: savedState.tasks,
+        columnSerial: savedState.columnSerial,
+        columns: savedState.columns,
+        columnOrder: savedState.columnOrder
+      })
+    }
+  }
+
   onDragEnd = result => {
     const {destination, source, draggableId, type} = result;
 
