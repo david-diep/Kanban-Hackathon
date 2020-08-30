@@ -162,7 +162,9 @@ class App extends React.Component {
               navbar-horizontal-fixed
               justify-content-between
               align-items-center
-            `}>
+            `}
+            id="navbar"
+            >
               <h2 className="text-white navbar-brand">Kanban</h2>
               <div>
                 <h5 className="text-white navbar-brand">Add New Column</h5>
@@ -175,6 +177,8 @@ class App extends React.Component {
                 </button>
               </div>
             </nav>
+            {/* this is hacky and should be replaced with a better solution */}
+            <div className="navbar-space"></div>
           </header>
           <div className="p-3 app">
             <DragDropContext

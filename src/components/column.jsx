@@ -22,6 +22,8 @@ class Column extends React.Component {
         {(provided, snapshot) => (
           <div
             className={`
+              col-min
+              overflow-y
               h-80
               w-25
               border

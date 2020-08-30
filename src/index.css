@@ -1,9 +1,13 @@
-.app{
+/* .app{
   min-height:85vh;
+} */
+
+.col-min{
+  min-width: 15vw;
 }
 
 .h-80{
-  min-height:80vh;
+  max-height:80vh;
 }
 
 /* .highlighted-task{
@@ -15,8 +19,16 @@
   overflow-x: auto;
 }
 
-/* .navbar-horizontal-fixed{
-  position: fixed!important;
+.overflow-y{
+  overflow-y: auto;
+}
+
+.navbar-horizontal-fixed{
+  position: fixed;
   left: 0;
   right: 0;
-} */
+}
+
+.navbar-space{
+  height: 60px;
+}
