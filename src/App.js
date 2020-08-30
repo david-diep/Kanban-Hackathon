@@ -47,14 +47,10 @@ class App extends React.Component {
   }
 
   changeTaskData(id, title, content){
-    console.log("changeTaskData", id, title, content)
     const newTasks = JSON.parse(JSON.stringify(this.state.tasks))
-    console.log("newTasks", newTasks)
     const newTask = { id: id, title: title, content: content}
-    console.log("newTask", newTask)
     newTasks[id]=newTask;
-    console.log("new newtasks", newTasks)
-    this.setState({tasks:newTasks}, ()=> console.log(this.state))
+    this.setState({tasks:newTasks})
   }
 
   componentDidUpdate(prevState){
@@ -73,7 +69,6 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    console.log("componentdidmount")
     let savedState = localStorage.savedState
     if(!savedState){
       const state = JSON.stringify(this.state)
