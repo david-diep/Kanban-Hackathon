@@ -62,8 +62,6 @@ class Column extends React.Component {
                 key={task.id}
                 task={task}
                 index={index}
-                changeTaskText={this.props.changeTaskText}
-                changeTaskTitle={this.props.changeTaskTitle}
                 displayTaskDetails={this.props.displayTaskDetails}
                 />
                 ))}

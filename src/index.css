@@ -20,6 +20,6 @@
   height: 60px;
 }
 
-.max-z{
-  z-index: 999;
+.nav-z{
+  z-index: 50;
 }

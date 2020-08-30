@@ -211,7 +211,7 @@ class App extends React.Component {
             <nav className={`
               navbar
               navbar-light
-              max-z
+              nav-z
               bg-dark
               d-flex
               navbar-horizontal-fixed
@@ -266,8 +266,6 @@ class App extends React.Component {
                         column = {column}
                         tasks = {tasks}
                         index = {index}
-                        changeTaskText = {this.changeTaskText}
-                        changeTaskTitle = {this.changeTaskTitle}
                         displayTaskDetails= {this.displayTaskDetails}
                         />
                     })}
