@@ -1,16 +1,8 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 
 .app{
   min-height:85vh;
@@ -21,6 +13,6 @@ code {
 }
 
 .highlighted-task{
-  border-width:7px!important;
-  border-color:yellow!important;
+  border-width:7px;
+  border-color:yellow;
 }
