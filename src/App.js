@@ -135,7 +135,6 @@ class App extends React.Component {
     const newColumnSerial = columnSerial + 1
     const newColumns = JSON.parse(JSON.stringify(this.state.columns))
     const newColumnOrder = this.state.columnOrder.splice(0)
-    console.log(columnSerial, newColumns, newColumnOrder)
     newColumns[`column-${columnSerial}`] = {
       id: `column-${columnSerial}`,
       title: 'New Column',
@@ -153,12 +152,14 @@ class App extends React.Component {
 
     return (
 
-        <div className="app">
+        <div className="app overflow-x">
           <header>
-            <nav className={`navbar
+            <nav className={`
+              navbar
               navbar-light
               bg-dark
               d-flex
+              navbar-horizontal-fixed
               justify-content-between
               align-items-center
             `}>
@@ -175,7 +176,7 @@ class App extends React.Component {
               </div>
             </nav>
           </header>
-          <div className="p-3 app overflow-x">
+          <div className="p-3 app">
             <DragDropContext
               onDragEnd={this.onDragEnd}
             >
@@ -186,7 +187,7 @@ class App extends React.Component {
               >
                 {provided => (
                   <div
-                    className="row app"
+                    className="row flex-nowrap"
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                   >
