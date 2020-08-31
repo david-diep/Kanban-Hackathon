@@ -1,22 +1,25 @@
 {
   "files": {
-    "main.css": "/kanban-hackathon/static/css/main.da9b9c07.chunk.css",
-    "main.js": "/kanban-hackathon/static/js/main.3ff6e1c6.chunk.js",
-    "main.js.map": "/kanban-hackathon/static/js/main.3ff6e1c6.chunk.js.map",
+    "main.css": "/kanban-hackathon/static/css/main.5d30bb94.chunk.css",
+    "main.js": "/kanban-hackathon/static/js/main.55081ebe.chunk.js",
+    "main.js.map": "/kanban-hackathon/static/js/main.55081ebe.chunk.js.map",
     "runtime-main.js": "/kanban-hackathon/static/js/runtime-main.8b26f085.js",
     "runtime-main.js.map": "/kanban-hackathon/static/js/runtime-main.8b26f085.js.map",
-    "static/js/2.b5386be6.chunk.js": "/kanban-hackathon/static/js/2.b5386be6.chunk.js",
-    "static/js/2.b5386be6.chunk.js.map": "/kanban-hackathon/static/js/2.b5386be6.chunk.js.map",
+    "static/css/2.d34346ea.chunk.css": "/kanban-hackathon/static/css/2.d34346ea.chunk.css",
+    "static/js/2.d384d5d9.chunk.js": "/kanban-hackathon/static/js/2.d384d5d9.chunk.js",
+    "static/js/2.d384d5d9.chunk.js.map": "/kanban-hackathon/static/js/2.d384d5d9.chunk.js.map",
     "index.html": "/kanban-hackathon/index.html",
-    "precache-manifest.7b646270fa28e8a3ab9f2cf89e3d08f9.js": "/kanban-hackathon/precache-manifest.7b646270fa28e8a3ab9f2cf89e3d08f9.js",
+    "precache-manifest.97db6543395be1e4b06895defef35876.js": "/kanban-hackathon/precache-manifest.97db6543395be1e4b06895defef35876.js",
     "service-worker.js": "/kanban-hackathon/service-worker.js",
-    "static/css/main.da9b9c07.chunk.css.map": "/kanban-hackathon/static/css/main.da9b9c07.chunk.css.map",
-    "static/js/2.b5386be6.chunk.js.LICENSE.txt": "/kanban-hackathon/static/js/2.b5386be6.chunk.js.LICENSE.txt"
+    "static/css/2.d34346ea.chunk.css.map": "/kanban-hackathon/static/css/2.d34346ea.chunk.css.map",
+    "static/css/main.5d30bb94.chunk.css.map": "/kanban-hackathon/static/css/main.5d30bb94.chunk.css.map",
+    "static/js/2.d384d5d9.chunk.js.LICENSE.txt": "/kanban-hackathon/static/js/2.d384d5d9.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.8b26f085.js",
-    "static/js/2.b5386be6.chunk.js",
-    "static/css/main.da9b9c07.chunk.css",
-    "static/js/main.3ff6e1c6.chunk.js"
+    "static/css/2.d34346ea.chunk.css",
+    "static/js/2.d384d5d9.chunk.js",
+    "static/css/main.5d30bb94.chunk.css",
+    "static/js/main.55081ebe.chunk.js"
   ]
 }
