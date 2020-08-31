@@ -44,8 +44,11 @@ Features Required for completion of the event:
 Additional Features:  
 
 - Highlighting Tasks and Columns on drag  
+
 - User can access a context menu on right click  
+
 - User can transfer all tasks from one column to another  
+
 - User can view notifications  
 
 Development
