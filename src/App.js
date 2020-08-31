@@ -60,12 +60,14 @@ class App extends React.Component {
     }
   }
 
+
+
   changeTaskData(id, title, content){
-    const newTasks = {...this.state.tasks}
+    const newTasks = JSON.parse(JSON.stringify(this.state.tasks))
     const newTask = { id: id, title: title, content: content}
     newTasks[id]=newTask;
-    this.setState({tasks:newTasks})
-    toast.success("Task Updated!")
+    this.setState({ tasks: newTasks }, () => toast.success("Task Updated!"))
+
   }
   changeColumnTitle(col, title) {
     const newColumns={...this.state.columns}
@@ -103,9 +105,9 @@ class App extends React.Component {
   }
 
   deleteTask(id){
-    const newTasks ={...this.state.tasks}
+    const newTasks = JSON.parse(JSON.stringify(this.state.tasks))
     delete newTasks[id];
-    const newColumns={...this.state.columns}
+    const newColumns = JSON.parse(JSON.stringify(this.state.columns))
     for(let column in newColumns){
       const deleteIndex = newColumns[column].taskIds.findIndex((taskId)=>taskId===id)
       if(deleteIndex>=0){
@@ -113,17 +115,16 @@ class App extends React.Component {
         break;
       }
     }
-    this.setState({tasks:newTasks,columns:newColumns})
-    toast.error("Task Deleted!")
+    this.setState({ tasks: newTasks, columns: newColumns }, () => toast.error("Task Deleted :("))
   }
 
-  moveTasksColumn(originId,targetId){
-    const newColumns ={...this.state.columns}
-    const ToMoveTasks=newColumns[originId].taskIds
-    newColumns[originId].taskIds=[];
-    const targetTasks= newColumns[targetId].taskIds.concat(ToMoveTasks)
+  moveTasksColumn(originId, targetId) {
+    const newColumns = JSON.parse(JSON.stringify(this.state.columns))
+    const ToMoveTasks = newColumns[originId].taskIds
+    newColumns[originId].taskIds = [];
+    const targetTasks = newColumns[targetId].taskIds.concat(ToMoveTasks)
     newColumns[targetId].taskIds = targetTasks;
-    this.setState({columns:newColumns})
+    this.setState({ columns: newColumns })
   }
 
   componentDidMount(){
@@ -220,20 +221,20 @@ class App extends React.Component {
   addCard(column){
     let taskSerial = this.state.taskSerial
     const newTaskSerial = taskSerial + 1
-    const newTasks = {...this.state.tasks}
+    const newTasks = JSON.parse(JSON.stringify(this.state.tasks))
     newTasks.[`task-${taskSerial}`] = {
       id: `task-${taskSerial}`,
       title: `Click to edit New Card`,
       content: ""
     }
-    const newColumns = {...this.state.columns}
+    const newColumns = JSON.parse(JSON.stringify(this.state.columns))
     newColumns[column].taskIds.unshift(`task-${taskSerial}`)
     this.setState({
       taskSerial: newTaskSerial,
       tasks: newTasks,
       columns: newColumns
-    })
-    toast.info("New Task Added!")
+    }, () => toast.info("New Task Added!"))
+
   }
 
 
@@ -262,8 +263,8 @@ class App extends React.Component {
   }
 
   deleteColumn(id){
-    const newColumns={...this.state.columns}
-    const newTasks={...this.state.tasks}
+    const newColumns = JSON.parse(JSON.stringify(this.state.columns))
+    const newTasks = JSON.parse(JSON.stringify(this.state.tasks))
     const newColumnOrder=[...this.state.columnOrder]
     const deleteOrderIndex= newColumnOrder.findIndex((col)=>col===id)
     newColumnOrder.splice(deleteOrderIndex,1)
@@ -272,13 +273,17 @@ class App extends React.Component {
       delete newTasks[deleteToTasks[i]]
     }
     delete newColumns[id];
-    this.setState({columns:newColumns,tasks:newTasks,columnOrder:newColumnOrder})
-    toast.error("Column Deleted!")
+    this.setState({
+      columns:newColumns,
+      tasks:newTasks,
+      columnOrder:newColumnOrder
+    }, () => toast.error("Column Deleted :("))
+
   }
 
   showDeleteColumn(){
     if (!this.state.deleteColumnButton) {
-      toast.warn("Columns can now be deleted!");
+      toast.warn("Columns can now be deleted?!");
     }
     this.setState(prevState=>{
       return {deleteColumnButton:!prevState.deleteColumnButton}
@@ -300,8 +305,8 @@ class App extends React.Component {
       columns: newColumns,
       columnSerial: newColumnSerial,
       columnOrder: newColumnOrder
-    })
-    toast.info("New Column Added")
+    }, () => toast.info("New Column Added!"))
+
   }
 
   render(){
@@ -311,6 +316,8 @@ class App extends React.Component {
         <div className="app overflow-x" onClick={this.handleClick}>
           {this.state.displayContext.display ?
             <ContextMenu
+              moveTasksColumn={this.moveTasksColumn}
+              displayContext={this.displayContext}
               columns={this.state.columns}
               pos={this.state.displayContext.pos}
               id={this.state.displayContext.contextId}
@@ -342,7 +349,6 @@ class App extends React.Component {
               <button className="btn btn-danger ml-3" onClick={this.showDeleteColumn}><h5>Toggle Column Delete</h5></button>
               </div>
             </nav>
-            {/* this is hacky and should be replaced with a better solution */}
             <div className="navbar-space"></div>
           </header>
 
@@ -391,7 +397,7 @@ class App extends React.Component {
           </DragDropContext>
           </div>
         </div>
-      <ToastContainer autoClose={2000} position="top-left" hideProgressBar={true} transition={Slide}/>
+      <ToastContainer autoClose={1500} position="bottom-right" hideProgressBar={true} transition={Slide}/>
 </>
 
     );
