@@ -61,16 +61,14 @@ class App extends React.Component {
 
   }
 
-  // JSON.parse(JSON.stringify(this.state.tasks))
-  // JSON.parse(JSON.stringify(this.state.columns))
 
 
   changeTaskData(id, title, content){
     const newTasks = JSON.parse(JSON.stringify(this.state.tasks))
     const newTask = { id: id, title: title, content: content}
     newTasks[id]=newTask;
-    this.setState({tasks:newTasks})
-    toast.success("Task Updated!")
+    this.setState({ tasks: newTasks }, () => toast.success("Task Updated!"))
+
   }
 
   displayContext(display, contextId, xPos, yPos){
@@ -113,8 +111,7 @@ class App extends React.Component {
         break;
       }
     }
-    this.setState({tasks:newTasks,columns:newColumns})
-    toast.error("Task Deleted!")
+    this.setState({ tasks: newTasks, columns: newColumns }, () => toast.error("Task Deleted :("))
   }
 
   moveTasksColumn(originId, targetId) {
@@ -232,8 +229,8 @@ class App extends React.Component {
       taskSerial: newTaskSerial,
       tasks: newTasks,
       columns: newColumns
-    })
-    toast.info("New Task Added!")
+    }, () => toast.info("New Task Added!"))
+
   }
 
 
@@ -276,13 +273,13 @@ class App extends React.Component {
       columns:newColumns,
       tasks:newTasks,
       columnOrder:newColumnOrder
-    })
-    toast.error("Column Deleted!")
+    }, () => toast.error("Column Deleted :("))
+
   }
 
   showDeleteColumn(){
     if (!this.state.deleteColumnButton) {
-      toast.warn("Columns can now be deleted!");
+      toast.warn("Columns can now be deleted?!");
     }
     this.setState(prevState=>{
       return {deleteColumnButton:!prevState.deleteColumnButton}
@@ -304,8 +301,8 @@ class App extends React.Component {
       columns: newColumns,
       columnSerial: newColumnSerial,
       columnOrder: newColumnOrder
-    })
-    toast.info("New Column Added")
+    }, () => toast.info("New Column Added!"))
+
   }
 
   render(){
@@ -348,7 +345,6 @@ class App extends React.Component {
               <button className="btn btn-danger ml-3" onClick={this.showDeleteColumn}><h5>Toggle Column Delete</h5></button>
               </div>
             </nav>
-            {/* this is hacky and should be replaced with a better solution */}
             <div className="navbar-space"></div>
           </header>
 
@@ -396,7 +392,7 @@ class App extends React.Component {
           </DragDropContext>
           </div>
         </div>
-      <ToastContainer autoClose={2000} position="bottom-right" hideProgressBar={true} transition={Slide}/>
+      <ToastContainer autoClose={1500} position="bottom-right" hideProgressBar={true} transition={Slide}/>
 </>
 
     );
