@@ -19,6 +19,7 @@ class App extends React.Component {
     this.deleteTask = this.deleteTask.bind(this);
     this.displayContext = this.displayContext.bind(this)
     this.moveTasksColumn = this.moveTasksColumn.bind(this);
+    this.changeColumnTitle=this.changeColumnTitle.bind(this);
     this.state={
       taskSerial: 5,
       tasks:{
@@ -57,8 +58,6 @@ class App extends React.Component {
         pos:{}
       }
     }
-
-
   }
 
 
@@ -70,7 +69,12 @@ class App extends React.Component {
     this.setState({ tasks: newTasks }, () => toast.success("Task Updated!"))
 
   }
-
+  changeColumnTitle(col, title) {
+    const newColumns={...this.state.columns}
+    newColumns[col].title=title;
+    this.setState({columns:newColumns})
+    toast.success("Column Title Updated!")
+  }
   displayContext(display, contextId, xPos, yPos){
     this.setState({
       displayContext:{
@@ -384,6 +388,7 @@ class App extends React.Component {
                         displayTaskDetails= {this.displayTaskDetails}
                         deleteColumn={this.deleteColumn}
                         deleteColumnButton={this.state.deleteColumnButton}
+                        changeColumnTitle={this.changeColumnTitle}
                         />
                     })}
                     {provided.placeholder}
