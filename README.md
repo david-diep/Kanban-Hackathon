@@ -11,6 +11,10 @@ Participants
 
 [Tim Ahn](https://github.com/tim-ahn)
 
+Live Demo
+======
+[david-diep.github.io/kanban-hackathon](https://david-diep.github.io/kanban-hackathon/)
+
 Features
 =======
 Features Required for completion of the event: 
