@@ -13,12 +13,8 @@ class Column extends React.Component {
     this.onTitleSave=this.onTitleSave.bind(this);
   }
 
-  handleClick(e){
-    const id = e.target.id
-    const splitId = id.split('-')
-    if(splitId[0] === "column"){
-      this.props.addCard(id)
-    }
+  handleClick(){
+    this.props.addCard(this.props.column.id);
   }
 
   onTitleClick(){
@@ -69,7 +65,6 @@ class Column extends React.Component {
               :<h3 className="pt-2 pl-2" onClick={this.onTitleClick}>{this.props.column.title}</h3>}
             <div className={`m-2`}>
               <button
-                id={this.props.column.id}
                 className={`btn btn-primary`}
                 onClick={this.handleClick}
                 >
