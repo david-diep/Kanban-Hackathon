@@ -1,68 +1,78 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+kanban-hackathon
+=======
 
-## Available Scripts
+A hackathon complete for the MintBean 3 day Bootcamp Olympics
 
-In the project directory, you can run:
+Participants
+------
+[David Diep](https://github.com/david-diep)
 
-### `npm start`
+[Kevin Lenell](https://github.com/krlenell)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[Tim Ahn](https://github.com/tim-ahn)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Features
+=======
+Features Required for completion of the event: 
 
-### `npm test`
+- When the application starts, you have 3 empty columns: "Todo", "In progress", "Done"
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Each column has a "+" button. The user can click this button to create a task card in any column
 
-### `npm run build`
+- Task cards clearly display the title of the contained task
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- The user can move tasks between columns using drag-and-drop
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- The user can delete a task.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- The user can expand a task card to see its description
 
-### `npm run eject`
+- The user can move tasks between columns using the "Move" button in the context menu
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- The user can edit column titles
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- The user can create columns
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- The user can change the order of columns using drag-and-drop
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- The user can delete columns (you will have to decide what happens to a column's cards in this case)
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Development
+======
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+System Requirements
+------
 
-### Code Splitting
+- Node.js 10 or higher
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- npm 6 or higher
 
-### Analyzing the Bundle Size
+Technologies Used
+------
+- React
+- react-beautiful-dnd
+- react-toastify
+- Boostrap 4
+- create-react-app
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+### Getting Started
 
-### Making a Progressive Web App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+1. Clone this repository
 
-### Advanced Configuration
+```shell
+git clone https://github.com/david-diep/kanban-hackathon.git
+cd kanban-hackathon
+```
+2. Install dependencies with NPM
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+```shell
+npm install
+```
 
-### Deployment
+3. Start the project.  It can be view at [http://localhost:3000/](http://localhost:3000/) in the browser
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```shell
+npm run start
+```
