@@ -3,7 +3,8 @@ import Column from './components/column'
 import  { DragDropContext, Droppable} from 'react-beautiful-dnd'
 import TaskDetails from './components/task-details'
 import ContextMenu from './components/context-menu'
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends React.Component {
   constructor(props){
@@ -65,6 +66,7 @@ class App extends React.Component {
     const newTask = { id: id, title: title, content: content}
     newTasks[id]=newTask;
     this.setState({tasks:newTasks})
+    toast.success("Task Updated!")
   }
 
   displayContext(display, contextId, xPos, yPos){
@@ -108,6 +110,7 @@ class App extends React.Component {
       }
     }
     this.setState({tasks:newTasks,columns:newColumns})
+    toast.error("Task Deleted!")
   }
 
   moveTasksColumn(originId,targetId){
@@ -212,19 +215,20 @@ class App extends React.Component {
   addCard(column){
     let taskSerial = this.state.taskSerial
     const newTaskSerial = taskSerial + 1
-    const newTasks = JSON.parse(JSON.stringify(this.state.tasks))
+    const newTasks = {...this.state.tasks}
     newTasks.[`task-${taskSerial}`] = {
       id: `task-${taskSerial}`,
       title: `Click to edit New Card`,
       content: ""
     }
-    const newColumns = JSON.parse(JSON.stringify(this.state.columns))
+    const newColumns = {...this.state.columns}
     newColumns[column].taskIds.unshift(`task-${taskSerial}`)
     this.setState({
       taskSerial: newTaskSerial,
       tasks: newTasks,
       columns: newColumns
     })
+    toast.info("New Task Added!")
   }
 
 
@@ -264,10 +268,16 @@ class App extends React.Component {
     }
     delete newColumns[id];
     this.setState({columns:newColumns,tasks:newTasks,columnOrder:newColumnOrder})
+    toast.error("Column Deleted!")
   }
 
   showDeleteColumn(){
-    this.setState(prevState=>{return {deleteColumnButton:!prevState.deleteColumnButton}})
+    if (!this.state.deleteColumnButton) {
+      toast.warn("Columns can now be deleted!");
+    }
+    this.setState(prevState=>{
+      return {deleteColumnButton:!prevState.deleteColumnButton}
+    })
   }
 
   addColumn(){
@@ -286,11 +296,12 @@ class App extends React.Component {
       columnSerial: newColumnSerial,
       columnOrder: newColumnOrder
     })
+    toast.info("New Column Added")
   }
 
   render(){
 
-    return (
+    return (<>
 
         <div className="app overflow-x" onClick={this.handleClick}>
           {this.state.displayContext.display ?
@@ -301,6 +312,7 @@ class App extends React.Component {
             /> :
             <></>}
           <header>
+
             <nav className={`
               navbar
               navbar-light
@@ -373,7 +385,8 @@ class App extends React.Component {
           </DragDropContext>
           </div>
         </div>
-
+      <ToastContainer autoClose={2000} position="top-left" hideProgressBar={true}/>
+</>
 
     );
 }}
