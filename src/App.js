@@ -339,19 +339,29 @@ class App extends React.Component {
           </div>
           <div className="m-2 p-3 bg-secondary">
             <h2>The Team</h2>
-            <div className="row">
-                <div className="w-50 p-1 bg-light">
-                  <div className="w-25 p-1">
+            <div className="row justify-content-around">
+                <div className="p-2 m-2 bg-light">
                     <h4>David Diep</h4>
-                  </div>
-                  <div className="w-50 p-1">
-                    <img src="../images/david.png" alt="David Diep">
+                  <div className="w-100 p-1">
+                    <img src="https://i.imgur.com/7Dz1MT5.png" alt="David Diep" width="300">
                     </img>
+                    <div className="row p-2 w-100">
+                    <a class="btn btn-outline-dark m-1" href="https://github.com/david-diep/" target="_blank" rel="noopener noreferrer" role="button">GitHub <img class="logo" src="https://i.imgur.com/syIhqol.png" alt="gitHub"></img></a>
+                    <a class="btn btn-outline-primary m-1" href="https://www.linkedin.com/in/david-diep-dev/" target="_blank" rel="noopener noreferrer" role="button"><span class="align-bottom">Linked</span> <img class="logo" alt="linkedIn" src="https://i.imgur.com/lYabiUU.png"></img></a>
+                  </div>
                   </div>
               </div>
-              <div className="w-50 p-1">
-
-              </div>
+                <div className="p-2 m-2  bg-light">
+                  <h4>Kevin Lenell</h4>
+                  <div className="w-100 p-1">
+                    <img src="https://i.imgur.com/akIMMka.png" alt="Kevin Lenell" width="300">
+                    </img>
+                    <div className="row p-2 w-100">
+                      <a class="btn btn-outline-dark m-1" href="https://github.com/krlenell" target="_blank" rel="noopener noreferrer" role="button">GitHub <img class="logo" src="https://i.imgur.com/syIhqol.png" alt="gitHub"></img></a>
+                      <a class="btn btn-outline-primary m-1" href="https://www.linkedin.com/in/kevin-lenell/" target="_blank" rel="noopener noreferrer" role="button"><span class="align-bottom">Linked</span> <img class="logo" alt="linkedIn" src="https://i.imgur.com/lYabiUU.png"></img></a>
+                    </div>
+                  </div>
+                </div>
             </div>
           </div>
           <div>
