@@ -3,7 +3,7 @@ import Column from './components/column'
 import  { DragDropContext, Droppable} from 'react-beautiful-dnd'
 import TaskDetails from './components/task-details'
 import ContextMenu from './components/context-menu'
-import { toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 class App extends React.Component {
@@ -385,7 +385,7 @@ class App extends React.Component {
           </DragDropContext>
           </div>
         </div>
-      <ToastContainer autoClose={2000} position="top-left" hideProgressBar={true}/>
+      <ToastContainer autoClose={2000} position="top-left" hideProgressBar={true} transition={Slide}/>
 </>
 
     );
