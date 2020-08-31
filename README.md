@@ -41,6 +41,12 @@ Features Required for completion of the event:
 
 - The user can delete columns (you will have to decide what happens to a column's cards in this case)
 
+Additional Features:  
+
+- Highlighting Tasks and Columns on drag  
+- User can access a context menu on right click  
+- User can transfer all tasks from one column to another  
+- User can view notifications  
 
 Development
 ======
