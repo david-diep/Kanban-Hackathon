@@ -50,6 +50,8 @@ Additional Features:
 - User can transfer all tasks from one column to another  
 
 - User can view notifications  
+  
+- Persistent content by saving to LocalStorage
 
 Development
 ======
