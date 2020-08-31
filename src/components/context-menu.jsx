@@ -7,6 +7,7 @@ export default class ContextMenu extends React.Component{
     const yPos = this.props.pos.yPos
     return(
       <div
+      id="context"
       className="card"
       style={{
         position: "fixed",

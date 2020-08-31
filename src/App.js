@@ -222,6 +222,24 @@ class App extends React.Component {
     if(e.target.id === "add-column"){
       this.addColumn()
     }
+    let inContext = false
+    let node = e.target
+    while (node){
+      if(node.id === 'context'){
+        inContext = true
+        break
+      }
+      node = node.parentNode
+    }
+    if(!inContext){
+      this.setState({
+        displayContext: {
+          display: false,
+          contextId: null,
+          pos: {}
+        }
+      })
+    }
   }
 
   deleteColumn(id){
@@ -264,7 +282,7 @@ class App extends React.Component {
 
     return (
 
-        <div className="app overflow-x">
+        <div className="app overflow-x" onClick={this.handleClick}>
           {this.state.displayContext.display ?
             <ContextMenu
               pos={this.state.displayContext.pos}
@@ -288,7 +306,6 @@ class App extends React.Component {
               <div>
               <h5 className="text-white navbar-brand">Add New Column</h5>
                 <button
-                  onClick={this.handleClick}
                   className="btn btn-primary"
                   id="add-column"
                 >
