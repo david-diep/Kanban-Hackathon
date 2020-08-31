@@ -1,7 +1,7 @@
 kanban-hackathon
 =======
 
-A hackathon complete for the MintBean 3 day Bootcamp Olympics
+A hackathon complete for the [MintBean 3 Day JavaScript Bootcamp Olympics](https://sites.google.com/mintbean.io/javascriptbootcampolympics/home)
 
 Participants
 ------
@@ -13,7 +13,7 @@ Participants
 
 Features
 =======
-Features Required for completion of the event: 
+Features Required for completion of the event:
 
 - When the application starts, you have 3 empty columns: "Todo", "In progress", "Done"
 
@@ -53,7 +53,7 @@ Technologies Used
 - React
 - react-beautiful-dnd
 - react-toastify
-- Boostrap 4
+- Bootstrap 4
 - create-react-app
 
 ### Getting Started
