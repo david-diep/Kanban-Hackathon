@@ -312,6 +312,7 @@ class App extends React.Component {
         <div className="app overflow-x" onClick={this.handleClick}>
           {this.state.displayContext.display ?
             <ContextMenu
+              deleteColumn= {this.deleteColumn}
               moveTasksColumn={this.moveTasksColumn}
               displayContext={this.displayContext}
               columns={this.state.columns}
