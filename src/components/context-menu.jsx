@@ -45,7 +45,7 @@ export default class ContextMenu extends React.Component{
       }}
       >
         <div className="p-2">
-          <h6>{columns[id].title}</h6>
+          <h6>Column: {columns[id].title}</h6>
           <p>Move All Cards To:</p>
           <ul className="list-group">
             {columnsList.map((item) => item)}

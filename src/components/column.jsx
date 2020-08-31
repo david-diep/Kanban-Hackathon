@@ -8,9 +8,14 @@ class Column extends React.Component {
     this.state = {editTitle: false, columnTitle: this.props.column.title}
     this.handleClick = this.handleClick.bind(this);
     this.handleContext = this.handleContext.bind(this);
+    this.deleteThisColumn = this.deleteThisColumn.bind(this);
     this.onTitleChange=this.onTitleChange.bind(this);
     this.onTitleClick=this.onTitleClick.bind(this);
     this.onTitleSave=this.onTitleSave.bind(this);
+  }
+
+  deleteThisColumn() {
+    this.props.deleteColumn(this.props.column.id)
   }
 
   handleClick(){
@@ -70,6 +75,12 @@ class Column extends React.Component {
                 >
               <i className="fa fa-plus" aria-hidden="true"></i>
               </button>
+                {this.props.deleteColumnButton &&
+                  <button
+                    className="btn btn-outline-danger ml-2"
+                    onClick={this.deleteThisColumn}>
+                    <i className="fa fa-trash" aria-hidden="true"></i>
+                  </button>}
             </div>
           </div>
           <Droppable droppableId={this.props.column.id}>

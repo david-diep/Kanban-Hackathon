@@ -20,12 +20,17 @@ class App extends React.Component {
     this.moveTasksColumn = this.moveTasksColumn.bind(this);
     this.changeColumnTitle=this.changeColumnTitle.bind(this);
     this.state={
-      taskSerial: 5,
+      taskSerial: 10,
       tasks:{
-        'task-1': { id: 'task-1', title:"Take out the garbage.", content:""},
-        'task-2': { id: 'task-2', title: "Charge my phone.", content: "" },
-        'task-3': { id: 'task-3', title: "Complete the hackathon.", content: "" },
-        'task-4': { id: 'task-4', title: "Get a job.", content: "" }
+        'task-1': { id: 'task-1', title:"Take out the garbage.", content:"Empty Trash Can"},
+        'task-2': { id: 'task-2', title: "Charge my phone.", content: "I lost my wire!" },
+        'task-3': { id: 'task-3', title: "Complete the hackathon.", content: "Deploying!" },
+        'task-4': { id: 'task-4', title: "Get a job.", content: "The Hard Part" },
+        'task-5': { id: 'task-5', title: "To make a new task, press the column's plus button.", content: "" },
+        'task-6': { id: 'task-6', title: "To delete a column, right click on a column.", content: "And press the red button. You will also delete all the tasks the column contains." },
+        'task-7': { id: 'task-7', title: "You can transfer all the tasks in one column into another", content: "With the context Menu by Right Clicking" },
+        'task-8': { id: 'task-8', title: "Edit a column's title by clicking on its title.", content: "Remember to press save. You can also drag a column by its head." },
+        'task-9': { id: 'task-9', title: "Clicking on a task will let you see it's description", content: "And edit/delete it." }
       },
       columnSerial: 4,
       columns:{
@@ -42,7 +47,7 @@ class App extends React.Component {
         'column-3': {
           id: 'column-3',
           title: "Done",
-          taskIds: []
+          taskIds: ['task-5', 'task-6', 'task-7', 'task-8', 'task-9']
         }
       },
       columnOrder: ['column-1', 'column-2', 'column-3'],
