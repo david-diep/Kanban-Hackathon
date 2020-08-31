@@ -6,7 +6,6 @@ class Column extends React.Component {
   constructor(props){
     super(props)
     this.handleClick = this.handleClick.bind(this)
-    this.deleteThisColumn=this.deleteThisColumn.bind(this)
     this.handleContext=this.handleContext.bind(this)
   }
 
@@ -25,13 +24,10 @@ class Column extends React.Component {
     this.props.displayContext(true, this.props.column.id, xPos, yPos)
   }
 
-  deleteThisColumn(){
-    this.props.deleteColumn(this.props.column.id)
-  }
+
 
   render() {
     return (
-
       <Draggable draggableId={this.props.column.id} index={this.props.index}>
         {(provided, snapshot) => (
           <div
@@ -58,12 +54,6 @@ class Column extends React.Component {
                 >
               <i className="fa fa-plus" aria-hidden="true"></i>
               </button>
-                {this.props.deleteColumnButton &&
-                <button
-                className="btn btn-outline-danger ml-2"
-                onClick={this.deleteThisColumn}>
-                  <i className="fa fa-trash" aria-hidden="true"></i>
-                </button>}
             </div>
           </div>
           <Droppable droppableId={this.props.column.id}>

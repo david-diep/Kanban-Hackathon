@@ -8,7 +8,6 @@ export default class ContextMenu extends React.Component{
 
   handleClick(e){
     const splitId=e.target.id.split('_')
-    console.log(splitId)
     const thisId = this.props.id
     if(splitId[0] === 'moveto'){
       this.props.moveTasksColumn(thisId, splitId[1])
