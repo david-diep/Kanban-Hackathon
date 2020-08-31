@@ -113,12 +113,13 @@ class App extends React.Component {
     toast.error("Task Deleted!")
   }
 
-  moveTasksColumn(originId,targetId){
-    const newColumns ={...this.state.columns}
-    const ToMoveTasks=newColumns[originId].taskIds
-    newColumns[originId].taskIds=[];
-    newColumns[targetId].taskIds.concat(ToMoveTasks)
-    this.setState({columns:newColumns})
+  moveTasksColumn(originId, targetId) {
+    const newColumns = JSON.parse(JSON.stringify(this.state.columns))
+    const ToMoveTasks = newColumns[originId].taskIds
+    newColumns[originId].taskIds = [];
+    const targetTasks = newColumns[targetId].taskIds.concat(ToMoveTasks)
+    newColumns[targetId].taskIds = targetTasks;
+    this.setState({ columns: newColumns })
   }
 
   componentDidMount(){
@@ -306,6 +307,8 @@ class App extends React.Component {
         <div className="app overflow-x" onClick={this.handleClick}>
           {this.state.displayContext.display ?
             <ContextMenu
+              moveTasksColumn={this.moveTasksColumn}
+              displayContext={this.displayContext}
               columns={this.state.columns}
               pos={this.state.displayContext.pos}
               id={this.state.displayContext.contextId}
