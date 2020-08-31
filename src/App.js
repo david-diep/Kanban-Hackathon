@@ -110,12 +110,13 @@ class App extends React.Component {
     this.setState({tasks:newTasks,columns:newColumns})
   }
 
-  moveTasksColumn(originId,targetId){
-    const newColumns ={...this.state.columns}
-    const ToMoveTasks=newColumns[originId].taskIds
-    newColumns[originId].taskIds=[];
-    newColumns[targetId].taskIds.concat(ToMoveTasks)
-    this.setState({columns:newColumns})
+  moveTasksColumn(originId, targetId) {
+    const newColumns = JSON.parse(JSON.stringify(this.state.columns))
+    const ToMoveTasks = newColumns[originId].taskIds
+    newColumns[originId].taskIds = [];
+    const targetTasks = newColumns[targetId].taskIds.concat(ToMoveTasks)
+    newColumns[targetId].taskIds = targetTasks;
+    this.setState({ columns: newColumns })
   }
 
   componentDidMount(){

@@ -1,6 +1,19 @@
 import React from 'react'
 
 export default class ContextMenu extends React.Component{
+  constructor(props){
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(e){
+    const splitId=e.target.id.split('_')
+    const thisId = this.props.id
+    if(splitId[0] === 'moveto'){
+      this.props.moveTasksColumn(thisId, splitId[1])
+      this.props.displayContext(false, null, {})
+    }
+  }
 
   render(){
     const xPos = this.props.pos.xPos
@@ -11,11 +24,12 @@ export default class ContextMenu extends React.Component{
     for(const property in columns) {
       const children = columns[property].title
       if(columns[property] !== columns[id]){
-        columnsList.push(<li key={property} className="list-group-item">{children}</li>)
+        columnsList.push(<li key={property} id={`moveto_${property}`} className="list-group-item">{children}</li>)
       }
     }
     return(
       <div
+      onClick={this.handleClick}
       id="context"
       className="card"
       style={{
