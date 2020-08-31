@@ -61,8 +61,12 @@ class App extends React.Component {
 
   }
 
+  // JSON.parse(JSON.stringify(this.state.tasks))
+  // JSON.parse(JSON.stringify(this.state.columns))
+
+
   changeTaskData(id, title, content){
-    const newTasks = {...this.state.tasks}
+    const newTasks = JSON.parse(JSON.stringify(this.state.tasks))
     const newTask = { id: id, title: title, content: content}
     newTasks[id]=newTask;
     this.setState({tasks:newTasks})
@@ -99,9 +103,9 @@ class App extends React.Component {
   }
 
   deleteTask(id){
-    const newTasks ={...this.state.tasks}
+    const newTasks = JSON.parse(JSON.stringify(this.state.tasks))
     delete newTasks[id];
-    const newColumns={...this.state.columns}
+    const newColumns = JSON.parse(JSON.stringify(this.state.columns))
     for(let column in newColumns){
       const deleteIndex = newColumns[column].taskIds.findIndex((taskId)=>taskId===id)
       if(deleteIndex>=0){
@@ -216,13 +220,13 @@ class App extends React.Component {
   addCard(column){
     let taskSerial = this.state.taskSerial
     const newTaskSerial = taskSerial + 1
-    const newTasks = {...this.state.tasks}
+    const newTasks = JSON.parse(JSON.stringify(this.state.tasks))
     newTasks.[`task-${taskSerial}`] = {
       id: `task-${taskSerial}`,
       title: `Click to edit New Card`,
       content: ""
     }
-    const newColumns = {...this.state.columns}
+    const newColumns = JSON.parse(JSON.stringify(this.state.columns))
     newColumns[column].taskIds.unshift(`task-${taskSerial}`)
     this.setState({
       taskSerial: newTaskSerial,
@@ -258,8 +262,8 @@ class App extends React.Component {
   }
 
   deleteColumn(id){
-    const newColumns={...this.state.columns}
-    const newTasks={...this.state.tasks}
+    const newColumns = JSON.parse(JSON.stringify(this.state.columns))
+    const newTasks = JSON.parse(JSON.stringify(this.state.tasks))
     const newColumnOrder=[...this.state.columnOrder]
     const deleteOrderIndex= newColumnOrder.findIndex((col)=>col===id)
     newColumnOrder.splice(deleteOrderIndex,1)
@@ -268,7 +272,11 @@ class App extends React.Component {
       delete newTasks[deleteToTasks[i]]
     }
     delete newColumns[id];
-    this.setState({columns:newColumns,tasks:newTasks,columnOrder:newColumnOrder})
+    this.setState({
+      columns:newColumns,
+      tasks:newTasks,
+      columnOrder:newColumnOrder
+    })
     toast.error("Column Deleted!")
   }
 
@@ -388,7 +396,7 @@ class App extends React.Component {
           </DragDropContext>
           </div>
         </div>
-      <ToastContainer autoClose={2000} position="top-left" hideProgressBar={true} transition={Slide}/>
+      <ToastContainer autoClose={2000} position="bottom-right" hideProgressBar={true} transition={Slide}/>
 </>
 
     );
