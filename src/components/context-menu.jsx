@@ -54,7 +54,7 @@ export default class ContextMenu extends React.Component{
         <button id="delete"
           className="btn btn-danger"
         >
-          Delete {columns[id].title}
+          Delete Column: {columns[id].title}
         </button>
       </div>
     )

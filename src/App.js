@@ -19,7 +19,9 @@ class App extends React.Component {
     this.displayContext = this.displayContext.bind(this)
     this.moveTasksColumn = this.moveTasksColumn.bind(this);
     this.changeColumnTitle=this.changeColumnTitle.bind(this);
+    this.switchView=this.switchView.bind(this)
     this.state={
+      view:"home",
       taskSerial: 10,
       tasks:{
         'task-1': { id: 'task-1', title:"Take out the garbage.", content:"Empty Trash Can"},
@@ -74,8 +76,8 @@ class App extends React.Component {
   changeColumnTitle(col, title) {
     const newColumns={...this.state.columns}
     newColumns[col].title=title;
-    this.setState({columns:newColumns})
-    toast.success("Column Title Updated!")
+    this.setState({ columns: newColumns },()=> toast.success("Column Title Updated!"))
+
   }
   displayContext(display, contextId, xPos, yPos){
     this.setState({
@@ -126,7 +128,7 @@ class App extends React.Component {
     newColumns[originId].taskIds = [];
     const targetTasks = newColumns[targetId].taskIds.concat(ToMoveTasks)
     newColumns[targetId].taskIds = targetTasks;
-    this.setState({ columns: newColumns })
+    this.setState({ columns: newColumns },()=>toast.success("Tasks Moved!"))
   }
 
   componentDidMount(){
@@ -298,7 +300,68 @@ class App extends React.Component {
     }, () => toast.info("New Column Added!"))
   }
 
+  switchView(){
+    if(this.state.view==="home"){
+      this.setState({view:"app"})
+    }else{
+      this.setState({view:"home"})
+    }
+  }
+
   render(){
+
+    if(this.state.view==="home"){
+      return(<>
+      <header>
+        <nav className="navbar bg-dark row justify-content-between">
+            <h2 className="text-white navbar-brand px-3">Simple Kanban</h2>
+            <button className="btn btn-info mx-3" onClick={this.switchView}>Go To Kanban</button>
+        </nav>
+      </header>
+      <div className='container'>
+        <div className='d-flex flex-column bg-light'>
+          <div className="m-3 p-3 bg-secondary">
+            <h2>Stay Organized, Keep it Simple</h2>
+            <p>Don't make things more complicated than it has to be. That's why we have simple Kanban.</p>
+            <div className="row justify-content-center">
+              <iframe title="tutorial" width="600" height="350" src="https://www.youtube.com/embed/gPx23Ss8KR8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+          </div>
+          <div className="m-2 p-3 bg-info">
+            <h2>About This Project</h2>
+              <p><a href="https://github.com/david-diep/kanban-hackathon" target="_blank" rel="noopener noreferrer" className="text-dark">
+                <u>Simple Kanban</u></a> was a 3-day Mintbean Hackathon Project for the
+                <a href="https://sites.google.com/mintbean.io/javascriptbootcampolympics/home" target="_blank" rel="noopener noreferrer" className="text-dark"> <u>JavaScript Bootcamp Olympics.</u></a></p>
+              <p>The goal of the hackathon was to create a kanban board: an agile project management tool designed to help visualize work, limit work-in-progress, and maximize efficiency.
+                Essentially, it is a giant virtual board with post-it notes.
+              </p>
+              <p>We feel like we've been successful and we're proud of what we've managed to accomplish in the time frame.</p>
+          </div>
+          <div className="m-2 p-3 bg-secondary">
+            <h2>The Team</h2>
+            <div className="row">
+                <div className="w-50 p-1 bg-light">
+                  <div className="w-25 p-1">
+                    <h4>David Diep</h4>
+                  </div>
+                  <div className="w-50 p-1">
+                    <img src="../images/david.png" alt="David Diep">
+                    </img>
+                  </div>
+              </div>
+              <div className="w-50 p-1">
+
+              </div>
+            </div>
+          </div>
+          <div>
+
+          </div>
+        </div>
+      </div>
+    </>  )
+    }
+    else{
     return (<>
         <div className="app overflow-x" onClick={this.handleClick}>
           {this.state.displayContext.display ?
@@ -321,19 +384,18 @@ class App extends React.Component {
               d-flex
               navbar-horizontal-fixed
               justify-content-between
-              align-items-center
             `}
             id="navbar"
             >
-              <h2 className="text-white navbar-brand">Kanban</h2>
+              <h2 className="text-white navbar-brand" onClick={this.switchView}>Simple Kanban</h2>
               <div>
-              <h5 className="text-white navbar-brand">Add New Column</h5>
+
                 <button
                   className="btn btn-primary"
                   onClick={this.addColumn}
-                >
-                <i className="fa fa-plus" aria-hidden="true"></i>
+              >Add New Column <i className="fa fa-plus" aria-hidden="true"></i>
                 </button>
+                <button className="btn btn-info ml-2" onClick={this.switchView}>Info</button>
               </div>
             </nav>
             <div className="navbar-space"></div>
@@ -385,7 +447,7 @@ class App extends React.Component {
       <ToastContainer autoClose={1500} position="bottom-right" hideProgressBar={true} transition={Slide}/>
 </>
 
-    );
+    );}
 }}
 
 export default App;

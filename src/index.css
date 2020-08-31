@@ -28,3 +28,7 @@
 .nav-z{
   z-index: 50;
 }
+
+.pointer{
+  cursor:pointer;
+}
