@@ -367,6 +367,7 @@ class App extends React.Component {
                         deleteColumnButton={this.state.deleteColumnButton}
                         />
                     })}
+                    {provided.placeholder}
                   </div>)}
             </Droppable>
           </DragDropContext>
