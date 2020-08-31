@@ -236,9 +236,6 @@ class App extends React.Component {
 
 
   handleClick(e){
-    if(e.target.id === "add-column"){
-      this.addColumn()
-    }
     let inContext = false
     let node = e.target
     while (node){
@@ -328,7 +325,7 @@ class App extends React.Component {
               <h5 className="text-white navbar-brand">Add New Column</h5>
                 <button
                   className="btn btn-primary"
-                  id="add-column"
+                  onClick={this.addColumn}
                 >
                 <i className="fa fa-plus" aria-hidden="true"></i>
                 </button>
