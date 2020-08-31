@@ -13,6 +13,10 @@ export default class ContextMenu extends React.Component{
       this.props.moveTasksColumn(thisId, splitId[1])
       this.props.displayContext(false, null, {})
     }
+    if(splitId[0] === 'delete'){
+      this.props.deleteColumn(this.props.id)
+      this.props.displayContext(false, null, {})
+    }
   }
 
   render(){
@@ -46,6 +50,11 @@ export default class ContextMenu extends React.Component{
             {columnsList.map((item) => item)}
           </ul>
         </div>
+        <button id="delete"
+          className="btn btn-danger"
+        >
+          Delete {columns[id].title}
+        </button>
       </div>
     )
   }

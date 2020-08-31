@@ -14,7 +14,6 @@ class App extends React.Component {
     this.handleClick = this.handleClick.bind(this)
     this.displayTaskDetails = this.displayTaskDetails.bind(this)
     this.changeTaskData = this.changeTaskData.bind(this);
-    this.showDeleteColumn = this.showDeleteColumn.bind(this);
     this.deleteColumn = this.deleteColumn.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
     this.displayContext = this.displayContext.bind(this)
@@ -51,7 +50,6 @@ class App extends React.Component {
         display: false,
         taskId: null
       },
-      deleteColumnButton: false,
       displayContext:{
         display: false,
         contextId: null,
@@ -67,7 +65,6 @@ class App extends React.Component {
     const newTask = { id: id, title: title, content: content}
     newTasks[id]=newTask;
     this.setState({ tasks: newTasks }, () => toast.success("Task Updated!"))
-
   }
   changeColumnTitle(col, title) {
     const newColumns={...this.state.columns}
@@ -281,15 +278,6 @@ class App extends React.Component {
 
   }
 
-  showDeleteColumn(){
-    if (!this.state.deleteColumnButton) {
-      toast.warn("Columns can now be deleted?!");
-    }
-    this.setState(prevState=>{
-      return {deleteColumnButton:!prevState.deleteColumnButton}
-    })
-  }
-
   addColumn(){
     const columnSerial = this.state.columnSerial
     const newColumnSerial = columnSerial + 1
@@ -306,16 +294,14 @@ class App extends React.Component {
       columnSerial: newColumnSerial,
       columnOrder: newColumnOrder
     }, () => toast.info("New Column Added!"))
-
   }
 
   render(){
-
     return (<>
-
         <div className="app overflow-x" onClick={this.handleClick}>
           {this.state.displayContext.display ?
             <ContextMenu
+              deleteColumn= {this.deleteColumn}
               moveTasksColumn={this.moveTasksColumn}
               displayContext={this.displayContext}
               columns={this.state.columns}
@@ -346,7 +332,6 @@ class App extends React.Component {
                 >
                 <i className="fa fa-plus" aria-hidden="true"></i>
                 </button>
-              <button className="btn btn-danger ml-3" onClick={this.showDeleteColumn}><h5>Toggle Column Delete</h5></button>
               </div>
             </nav>
             <div className="navbar-space"></div>
@@ -386,8 +371,6 @@ class App extends React.Component {
                         tasks = {tasks}
                         index = {index}
                         displayTaskDetails= {this.displayTaskDetails}
-                        deleteColumn={this.deleteColumn}
-                        deleteColumnButton={this.state.deleteColumnButton}
                         changeColumnTitle={this.changeColumnTitle}
                         />
                     })}
