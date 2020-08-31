@@ -15,6 +15,7 @@ class Task extends React.Component {
     return (
       <Draggable draggableId={this.props.task.id} index={this.props.index}>
         {(provided, snapshot) => (
+
           <div
             onClick={this.handleClick}
             className={`
@@ -29,12 +30,16 @@ class Task extends React.Component {
             {...provided.dragHandleProps}
             ref = {provided.innerRef}
           >
+
             <div className="card-title">
               {this.props.task.title}
             </div>
+
           </div>
+
         )}
       </Draggable>
+
     )}
 
 }
