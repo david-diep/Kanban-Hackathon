@@ -37,10 +37,11 @@ export default class ContextMenu extends React.Component{
       id="context"
       className="card"
       style={{
-        position: "fixed",
+        position: "absolute",
         top: yPos,
         left: xPos,
-        zIndex: 55
+        zIndex: 49,
+
       }}
       >
         <div className="p-2">
