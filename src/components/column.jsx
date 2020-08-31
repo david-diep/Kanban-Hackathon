@@ -20,10 +20,8 @@ class Column extends React.Component {
 
   handleContext(e){
     e.preventDefault()
-    console.log("context'd!")
     const xPos = e.pageX
     const yPos = e.pageY
-    console.log("x", xPos, "y", yPos)
     this.props.displayContext(true, this.props.column.id, xPos, yPos)
   }
 

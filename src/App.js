@@ -66,7 +66,6 @@ class App extends React.Component {
   }
 
   displayContext(display, contextId, xPos, yPos){
-    console.log("app Display context", display, contextId, xPos, yPos)
     this.setState({
       displayContext:{
         display: display,
