@@ -5,8 +5,12 @@ import {Droppable, Draggable} from 'react-beautiful-dnd'
 class Column extends React.Component {
   constructor(props){
     super(props)
-    this.handleClick = this.handleClick.bind(this)
-    this.handleContext=this.handleContext.bind(this)
+    this.state = {editTitle: false, columnTitle: this.props.column.title}
+    this.handleClick = this.handleClick.bind(this);
+    this.handleContext = this.handleContext.bind(this);
+    this.onTitleChange=this.onTitleChange.bind(this);
+    this.onTitleClick=this.onTitleClick.bind(this);
+    this.onTitleSave=this.onTitleSave.bind(this);
   }
 
   handleClick(e){
@@ -15,6 +19,20 @@ class Column extends React.Component {
     if(splitId[0] === "column"){
       this.props.addCard(id)
     }
+  }
+
+  onTitleClick(){
+    this.setState({editTitle:true});
+  }
+
+  onTitleChange(event){
+    this.setState({columnTitle:event.target.value})
+  }
+
+  onTitleSave(e){
+    e.preventDefault();
+    this.props.changeColumnTitle(this.props.column.id, this.state.columnTitle);
+    this.setState({ editTitle: false });
   }
 
   handleContext(e){
@@ -45,7 +63,10 @@ class Column extends React.Component {
           >
           <div className="w-100 border-bottom d-flex justify-content-between"
             {...provided.dragHandleProps}>
-            <h3 className="pt-2 pl-2">{this.props.column.title}</h3>
+            {this.state.editTitle?<>
+              <input value={this.state.columnTitle} onChange={this.onTitleChange}></input>
+              <button className="btn btn-success" onClick={this.onTitleSave}>Save</button></>
+              :<h3 className="pt-2 pl-2" onClick={this.onTitleClick}>{this.props.column.title}</h3>}
             <div className={`m-2`}>
               <button
                 id={this.props.column.id}
