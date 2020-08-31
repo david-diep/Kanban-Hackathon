@@ -73,7 +73,7 @@ export default class TaskDetails extends React.Component{
               <input
               type="text"
               id="title"
-              className="form-control-lg mb-1"
+              className="form-control-lg mb-1 w-100"
               value={this.state.title}
               onChange={this.handleChange}/>
             <h5>Description:</h5>
