@@ -10,7 +10,7 @@ export default class ContextMenu extends React.Component{
     const columnsList = []
     for(const property in columns) {
       const children = columns[property].title
-      if(children !== columns[id].title){
+      if(columns[property] !== columns[id]){
         columnsList.push(<li key={property} className="list-group-item">{children}</li>)
       }
     }
