@@ -79,12 +79,6 @@ class Column extends React.Component {
                 >
               <i className="fa fa-plus" aria-hidden="true"></i>
               </button>
-                {this.props.deleteColumnButton &&
-                <button
-                className="btn btn-outline-danger ml-2"
-                onClick={this.deleteThisColumn}>
-                  <i className="fa fa-trash" aria-hidden="true"></i>
-                </button>}
             </div>
           </div>
           <Droppable droppableId={this.props.column.id}>
