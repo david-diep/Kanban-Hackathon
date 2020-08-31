@@ -1,8 +1,9 @@
 import React from 'react';
 import Column from './components/column'
-import {DragDropContext, Droppable} from 'react-beautiful-dnd'
+import  { DragDropContext, Droppable} from 'react-beautiful-dnd'
 import TaskDetails from './components/task-details'
 import ContextMenu from './components/context-menu'
+
 
 class App extends React.Component {
   constructor(props){
@@ -16,6 +17,7 @@ class App extends React.Component {
     this.deleteColumn = this.deleteColumn.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
     this.displayContext = this.displayContext.bind(this)
+    this.moveTasksColumn = this.moveTasksColumn.bind(this);
     this.state={
       taskSerial: 5,
       tasks:{
@@ -59,7 +61,7 @@ class App extends React.Component {
   }
 
   changeTaskData(id, title, content){
-    const newTasks = JSON.parse(JSON.stringify(this.state.tasks))
+    const newTasks = {...this.state.tasks}
     const newTask = { id: id, title: title, content: content}
     newTasks[id]=newTask;
     this.setState({tasks:newTasks})
@@ -106,6 +108,14 @@ class App extends React.Component {
       }
     }
     this.setState({tasks:newTasks,columns:newColumns})
+  }
+
+  moveTasksColumn(originId,targetId){
+    const newColumns ={...this.state.columns}
+    const ToMoveTasks=newColumns[originId].taskIds
+    newColumns[originId].taskIds=[];
+    newColumns[targetId].taskIds.concat(ToMoveTasks)
+    this.setState({columns:newColumns})
   }
 
   componentDidMount(){
@@ -217,6 +227,7 @@ class App extends React.Component {
     })
   }
 
+
   handleClick(e){
     if(e.target.id === "add-column"){
       this.addColumn()
@@ -317,6 +328,7 @@ class App extends React.Component {
             {/* this is hacky and should be replaced with a better solution */}
             <div className="navbar-space"></div>
           </header>
+
           {this.state.taskDetails.display &&
           <TaskDetails
             changeTaskData={this.changeTaskData}

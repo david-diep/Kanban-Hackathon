@@ -69,14 +69,16 @@ export default class TaskDetails extends React.Component{
           className="card w-75"
           tabIndex="0">
           <div className="card-body">
+            <h5>Title:</h5>
               <input
               type="text"
               id="title"
-              className="form-control-lg"
+              className="form-control-lg mb-1"
               value={this.state.title}
               onChange={this.handleChange}/>
+            <h5>Description:</h5>
               <textarea
-                className="form-control text-dark"
+                className="form-control text-dark mb-1"
                 value={this.state.content}
                 placeholder="Type here to add a description"
                 onChange={this.handleChange}
@@ -85,12 +87,12 @@ export default class TaskDetails extends React.Component{
               <button
                 id="save"
                 onClick={this.handleClick}
-                className="btn btn-primary"
+                className="btn btn-primary m-1"
               >
                 Save
               </button>
               <button
-                className="btn btn-danger"
+                className="btn btn-danger m-1"
                 onClick={this.handleDelete}
                 >
                 Delete
